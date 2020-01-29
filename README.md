@@ -1,9 +1,9 @@
-# Azure Maze
+# Azure Maze #
 Kinetic Maze, with the Azure Kinect instead of XBox Kinect.
 
 
 
-## Installation
+## Installation ##
 Instructions to install the Azure Kinect SDK are from microsoft, copied here for convinience. No other dependencies should be needed.
 
 1. Configure the Microsoft Package Repository, and install the Azure Kinect packages and headers/cmake files:
@@ -16,13 +16,16 @@ Instructions to install the Azure Kinect SDK are from microsoft, copied here for
 ```
 
 
-## Azure Kinect on Linux
+## Azure Kinect on Linux ##
 As most Microsoft documentation is windows based, Linux usage will be documented as thoroughly as possible for future use. In general, follow instructions in the Microsoft documentation.
 
-To launch the Azure Kinect Viewer, run `k4aviewer` in the command line. 
+To launch the Azure Kinect Viewer, run `k4aviewer` in the command line.
+
+## Project Info ##
+C tracker code is mostly pulled from Microsoft sample code.
 
 
-## Reference Links
+## Reference Links ##
 [Azure Kinect Samples] (https://github.com/microsoft/Azure-Kinect-Samples)
 [Azure Kinect SDK] (https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
 [Azure Kinect DK Documentation] (https://docs.microsoft.com/en-us/azure/kinect-dk/)
