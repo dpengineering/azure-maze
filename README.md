@@ -22,3 +22,7 @@ As most Microsoft documentation is windows based, Linux usage will be documented
 To launch the Azure Kinect Viewer, run `k4aviewer` in the command line. 
 
 
+## Reference Links
+[Azure Kinect Samples] (https://github.com/microsoft/Azure-Kinect-Samples)
+[Azure Kinect SDK] (https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
+[Azure Kinect DK Documentation] (https://docs.microsoft.com/en-us/azure/kinect-dk/)
