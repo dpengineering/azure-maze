@@ -1,5 +1,6 @@
-# azure-maze
+# Azure Maze
 Kinetic Maze, with the Azure Kinect instead of XBox Kinect.
+Rewrite #3 total, #2 of 2019-2020
 
 
 ##Installation
