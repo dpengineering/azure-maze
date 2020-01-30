@@ -18,6 +18,8 @@ After C tracker is confirmed to work (print out angle, figure out access with a 
 FIDO write by writing and rewriting the first line of the file it makes in tmp.
 
 
+### Generic musing ###
+For the actual tracker, the FIDO findings mean that two pipes will need to be created, one for image and one for joints. Python file may just want to access that?
 
 
 #### Long Term Todo ####
