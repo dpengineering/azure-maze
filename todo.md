@@ -3,7 +3,7 @@
 ### Short Term Todo ###
 
 WHEN HARDWARE ARRIVES:
-Test Viewer
+Test Viewer, ensure all camera hardware is in working condition
 Test sample code for body tracking, note how new bodies are handled and what happens when old bodies leave, e.g. id reassignments?
 Pretty much just see if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user.
 
