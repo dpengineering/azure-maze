@@ -33,6 +33,9 @@ See if the body tracker renumbers bodies when one leaves, so the program calcula
 
 
 ## Reference Links ##
-[Azure Kinect Samples] (https://github.com/microsoft/Azure-Kinect-Samples)
-[Azure Kinect SDK] (https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
-[Azure Kinect DK Documentation] (https://docs.microsoft.com/en-us/azure/kinect-dk/)
+[Azure Kinect Samples](https://github.com/microsoft/Azure-Kinect-Samples)
+[Azure Kinect SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
+[Azure Kinect DK Documentation](https://docs.microsoft.com/en-us/azure/kinect-dk/)
+
+[Body Tracking SDK Reference](https://microsoft.github.io/Azure-Kinect-Body-Tracking/release/1.x.x/index.html)
+[Azure Kinect Sensor SDK Reference](https://microsoft.github.io/Azure-Kinect-Sensor-SDK/master/index.html)

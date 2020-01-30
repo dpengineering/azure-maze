@@ -32,7 +32,7 @@ int main()
   mkfifo(jointfifo, 0666);
 
   char arr1[80], arr2[80];
-  while (1)
+  while (1) //start pipe loop
   {
     // Get body tracking data!
     k4a_device_t device = NULL;
@@ -86,6 +86,15 @@ int main()
         k4abt_skeleton_t skeleton;
         k4abt_frame_get_body_skeleton(body_frame, 0, &skeleton);
         uint32_t id = k4abt_frame_get_body_id(body_frame, i);
+        //output is stored in skeleton if successful.
+
+        //hypothetical, assumes that skeleton is an array of joints, and each joint is defined as in the SDK reference (pos in mm, orientation in quaternion, confidence level)
+        enum lh = skeleton[8]
+        enum rh = skeleton[15]
+        if (lh[2] == K4ABT_JOINT_CONFIDENCE_MEDIUM && rh[2] == K4ABT_JOINT_CONFIDENCE_MEDIUM)
+        {
+
+        }
 
 
         //Calculate hand angle of body 1
@@ -121,6 +130,8 @@ int main()
 
     k4abt_tracker_shutdown(tracker);
     k4abt_tracker_destroy(tracker);
+
+    //send angle info to FIFO
 
 
     // Open joint FIFO for write only - sent joint data (Parse into angle)
