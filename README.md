@@ -28,20 +28,7 @@ Current plan: Create two FIFO pipes, one for image data and one for joint (aka h
 
 Joint info is priority, to get project back to basic working state on new hardware.
 
-### Things to test ###
-See if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user.
 
-### To-do ###
-Make an Azure Kinect library for DPEA Python programmers, if determined useful for future use.
-
-WHEN HARDWARE ARRIVES:
-Test Viewer
-Test sample code for body tracking, note how new bodies are handled and what happens when old bodies leave, e.g. id reassignments?
-IF ids not reassigned, check if skeleton data becomes null
-
-See if body tracking SDK sample draws the skeleton, if so implement into imageFIDO at some point with it, if not figure out how to access data. If needed, potentially run the body tracking equivalent of k4 viewer in parallel?
-
-After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fido file when written to), then reimplement all of game.
 
 ## Reference Links ##
 [Azure Kinect Samples](https://github.com/microsoft/Azure-Kinect-Samples)
