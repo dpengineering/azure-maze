@@ -84,7 +84,7 @@ int main()
         //Get joint info for first body, ADD CHECK FOR FIRST NONEMPTY BODY IF NUMBERS DO NOT REASSIGN
 
         k4abt_skeleton_t skeleton;
-        k4abt_frame_get_body_skeleton(body_frame, 0, &skeleton);
+        k4abt_frame_get_body_skeleton(body_frame, 0, &skeleton); //only of skeleton 1 - index 0? 
         uint32_t id = k4abt_frame_get_body_id(body_frame, i);
         //output is stored in skeleton if successful.
 
@@ -93,11 +93,8 @@ int main()
         enum rh = skeleton[15]
         if (lh[2] == K4ABT_JOINT_CONFIDENCE_MEDIUM && rh[2] == K4ABT_JOINT_CONFIDENCE_MEDIUM)
         {
-
+            //CALCULATE ANGLE, or difference in height?
         }
-
-
-        //Calculate hand angle of body 1
 
         k4abt_frame_release(body_frame); // Remember to release the body frame once you finish using it
       }
