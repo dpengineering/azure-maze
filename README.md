@@ -24,7 +24,12 @@ To launch the Azure Kinect Viewer, run `k4aviewer` in the command line.
 ## Project Info ##
 C tracker code is mostly pulled from Microsoft sample code.
 
-Current plan: Create two FIFO pipes, one for image data and one for joint data. Then figure out how to access those from python, or another C program.
+Current plan: Create two FIFO pipes, one for image data and one for joint (aka hand angle) data. Then figure out how to access those from python, or another C program. May want to convert entire project to C, but unlikely.
+
+Joint info is priority, to get project back to basic working state on new hardware.
+
+### Things to test ###
+See if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user.
 
 
 ## Reference Links ##
