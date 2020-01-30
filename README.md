@@ -24,6 +24,8 @@ To launch the Azure Kinect Viewer, run `k4aviewer` in the command line.
 ## Project Info ##
 C tracker code is mostly pulled from Microsoft sample code.
 
+Current plan: Create two FIFO pipes, one for image data and one for joint data. Then figure out how to access those from python, or another C program.
+
 
 ## Reference Links ##
 [Azure Kinect Samples] (https://github.com/microsoft/Azure-Kinect-Samples)
