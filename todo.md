@@ -24,6 +24,8 @@ This would allow for a minimal GUI, mostly consisting of text. Could even use a 
 
 Also write up the user instructions for minimal guidance.
 
+##### Fun ideas #####
+Nixie tubes as a timer system, just for that retro feel
 
 
 ### Short Term Findings ###
