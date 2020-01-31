@@ -2,20 +2,32 @@
 
 ### Short Term Todo ###
 
-WHEN HARDWARE ARRIVES:
-Test Viewer, ensure all camera hardware is in working condition
+#### WHEN HARDWARE ARRIVES: ####
+Test Viewer, ensure all camera hardware is in working condition.
 Test sample code for body tracking, note how new bodies are handled and what happens when old bodies leave, e.g. id reassignments?
-Pretty much just see if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user.
+Pretty much just see if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user. IF ids not reassigned, check if skeleton data becomes null
 
-
-IF ids not reassigned, check if skeleton data becomes null
-
-See if body tracking SDK sample draws the skeleton, if so implement into imageFIFO at some point with it, if not figure out how to access data. If needed, potentially run the body tracking equivalent of k4 viewer in parallel?
+See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own, while python only controls motors and parsing of angles, as images are not easily passed through FIFO pipes. Again, priority is to getting the game back into a working state, without a full GUI with menus and such. After that, then pass image to pygame and make GUIs.
 
 After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fido file when written to), then reimplement all of game.
 
+#### Software tests,beyond basic working state ####
+How does Azure output the body tracking image? How can this image be passed to python for a pygame GUI?
+Might need a GUI concept redesign to better fit the project, if needed just slap an arcade joystick on? Or a bluetooth remote? Some sort of station on an arm from the project that can telescope out to where the user would be standing and retract when the game starts?
+
+##### UI Ideas #####
+Maybe a pose detector and afk. AFK loop with a welcome message, then when someone approaches and gets in the pose the game detects, gives a few seconds to confirm, starts a countdown to start the game, starts the game, and if completed, if score in the HS list then assign a automatically generated user ID and register, if not show high scores regardless, then go back to afk loop.
+
+If afk detected (original pose user gone), return to the timer, when timer runs out, quit to main waiting loop?
+
+This would allow for a minimal GUI, mostly consisting of text. Could even use a LED strip and have scrolling instructions, instead of displaying also on the screen (which would be pretty small and hard to read from a distance anyways, especially if it's on a boom).
+
+Also write up the user instructions for minimal guidance.
+
+
+
 ### Short Term Findings ###
-FIFO write by writing and rewriting the first line of the file it makes in tmp.
+FIFO write by writing and rewriting the first line of the file it makes (currently in tmp).
 
 
 ### Generic musing ###
