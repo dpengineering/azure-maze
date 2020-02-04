@@ -20,6 +20,8 @@ Note: requires OpenGL 4.4 and above
 When installing samples:
 https://github.com/microsoft/Azure-Kinect-Sensor-SDK/issues/896
 
+if device unavailable after compiling samples, run with sudo as rules not properly set.
+
 
 ## Azure Kinect on Linux ##
 As most Microsoft documentation is windows based, Linux usage will be documented as thoroughly as possible for future use. In general, follow instructions in the Microsoft documentation.
