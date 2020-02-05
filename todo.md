@@ -1,12 +1,6 @@
 # Todo #
 
 ### Short Term Todo ###
-
-#### WHEN HARDWARE ARRIVES: ####
-Test Viewer, ensure all camera hardware is in working condition.
-Test sample code for body tracking, note how new bodies are handled and what happens when old bodies leave, e.g. id reassignments?
-Pretty much just see if the body tracker renumbers bodies when one leaves, so the program calculates the angle for the actual user. IF ids not reassigned, check if skeleton data becomes null
-
 See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own, while python only controls motors and parsing of angles, as images are not easily passed through FIFO pipes. Again, priority is to getting the game back into a working state, without a full GUI with menus and such. After that, then pass image to pygame and make GUIs.
 
 After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fido file when written to), then reimplement all of game. Also check out the windows3d visualization system, to see if it's what we want.
@@ -32,6 +26,7 @@ Nixie tubes as a timer system, just for that retro feel
 
 ### Short Term Findings ###
 FIFO write by writing and rewriting the first line of the file it makes (currently in tmp).
+UArm tracking (arms in |\_o\_| shape) works decently, right arm needs to be slightly out though.
 
 
 ### Generic musing ###
