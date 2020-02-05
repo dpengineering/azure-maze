@@ -72,7 +72,7 @@ int main()
         {
             frame_count++;
 
-            printf("Start processing frame %d\n", frame_count);
+            //printf("Start processing frame %d\n", frame_count);
 
             k4a_wait_result_t queue_capture_result = k4abt_tracker_enqueue_capture(tracker, sensor_capture, K4A_WAIT_INFINITE);
 
@@ -94,7 +94,7 @@ int main()
             if (pop_frame_result == K4A_WAIT_RESULT_SUCCEEDED)
             {
                 uint32_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
-                //printf("%u bodies are detected!\n", num_bodies);
+                printf("%u bodies are detected!\n", num_bodies);
 
                 k4abt_body_t body;
                 if (num_bodies >= 1){
@@ -104,10 +104,22 @@ int main()
                   //printf("Body ID: %u\n", body.id);
                   //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
 
-                  print_joint_information(8, body);
-                  print_joint_information(6, body);
-                  print_joint_information(15, body);
-                  print_joint_information(13, body);
+                  //LEFT SIDE: tested and works
+                  if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0]){
+                    printf("LH abv LE!\n");
+                  }
+                  else {
+                    printf("Nope");
+                  }
+
+                  //RIGHT HAND
+                  if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
+                    printf("RH abv RE!\n");
+                  }
+                  else {
+                    printf("Nope");
+                  }
+
                 }
 
               }
