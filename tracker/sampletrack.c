@@ -94,18 +94,21 @@ int main()
             if (pop_frame_result == K4A_WAIT_RESULT_SUCCEEDED)
             {
                 uint32_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
-                printf("%u bodies are detected!\n", num_bodies);
+                //printf("%u bodies are detected!\n", num_bodies);
 
                 k4abt_body_t body;
-                VERIFY(k4abt_frame_get_body_skeleton(body_frame, 1, &body.skeleton), "Get body from body frame failed!");
-                body.id = k4abt_frame_get_body_id(body_frame, 1);
-                //PROCESSING GOES HERE
-                printf("Body ID: %u\n", body.id);
-                //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
-                print_joint_information(8, body);
-                print_joint_information(6, body);
-                print_joint_information(15, body);
-                print_joint_information(13, body);
+                if (num_bodies >= 1){
+                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, 0, &body.skeleton), "Get body from body frame failed!");
+                  body.id = k4abt_frame_get_body_id(body_frame, 0);
+                  //PROCESSING GOES HERE
+                  //printf("Body ID: %u\n", body.id);
+                  //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
+
+                  print_joint_information(8, body);
+                  print_joint_information(6, body);
+                  print_joint_information(15, body);
+                  print_joint_information(13, body);
+                }
 
               }
             else if (pop_frame_result == K4A_WAIT_RESULT_TIMEOUT)
