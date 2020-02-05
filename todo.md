@@ -1,13 +1,20 @@
 # Todo #
 
 ### Short Term Todo ###
+See if 2D body tracking possible, merge with greenscreen to limit which user is tracked.
+
+
 See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own, while python only controls motors and parsing of angles, as images are not easily passed through FIFO pipes. Again, priority is to getting the game back into a working state, without a full GUI with menus and such. After that, then pass image to pygame and make GUIs.
 
-After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fido file when written to), then reimplement all of game. Also check out the windows3d visualization system, to see if it's what we want.
+After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fifo file when written to), then reimplement all of game.
 
 #### Software tests,beyond basic working state ####
-How does Azure output the body tracking image? How can this image be passed to python for a pygame GUI?
+Can Azure output body tracking image in 2D? How can this image be passed to python for a pygame GUI?
 Might need a GUI concept redesign to better fit the project, if needed just slap an arcade joystick on? Or a bluetooth remote? Some sort of station on an arm from the project that can telescope out to where the user would be standing and retract when the game starts?
+
+ALTERNATIVELY
+Can green screen have numbers written on the sides instead of body tracking, display coordinate difference or some arbitrary value tied to the angle?
+How does green screen work?
 
 ##### UI Ideas #####
 Maybe a pose detector and afk. AFK loop with a welcome message, then when someone approaches and gets in the pose the game detects, gives a few seconds to confirm, starts a countdown to start the game, starts the game, and if completed, if score in the HS list then assign a automatically generated user ID and register, if not show high scores regardless, then go back to afk loop.
@@ -20,17 +27,12 @@ Also write up the user instructions for minimal guidance.
 
 ADMIN SCREEN: Series of hardware switches to act as kill switches on various components?  Key, etc.
 
-##### Fun ideas #####
-Nixie tubes as a timer system, just for that retro feel
 
-
-### Short Term Findings ###
+### Notes ###
 FIFO write by writing and rewriting the first line of the file it makes (currently in tmp).
 UArm tracking (arms in |\_o\_| shape) works decently, right arm needs to be slightly out though.
+User numbers seem to be kept when other users leave, however simple_3d_tracker sometimes will display multiple people as the same color, which means same index?
 
-
-### Generic musing ###
-For the actual tracker, the FIFO findings mean that two pipes will need to be created, one for image and one for joints. Python file may just want to access that?
 
 
 #### Long Term Todo ####

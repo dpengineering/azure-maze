@@ -15,9 +15,9 @@ Instructions to install the Azure Kinect SDK are from microsoft, copied here for
  sudo apt install libk4a1.1-dev
  sudo apt install libk4abt1.0-dev
 ```
-Note: requires OpenGL 4.4 and above
+Note: requires OpenGL 4.4 and above,
 
-When installing samples:
+When installing Azure Kinect Samples:
 https://github.com/microsoft/Azure-Kinect-Sensor-SDK/issues/896
 
 if device unavailable after compiling samples, run with sudo as rules not properly set.
@@ -33,7 +33,7 @@ C tracker code is mostly pulled from Microsoft sample code.
 
 Current plan: Create two FIFO pipes, one for image data and one for joint (aka hand angle) data. Then figure out how to access those from python, or another C program. May want to convert entire project to C, but unlikely.
 
-Joint info is priority, to get project back to basic working state on new hardware.
+See todo for plans.
 
 
 

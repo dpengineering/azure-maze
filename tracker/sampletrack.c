@@ -72,7 +72,7 @@ int main()
         {
             frame_count++;
 
-            //printf("Start processing frame %d\n", frame_count);
+            printf("Start processing frame %d\n", frame_count);
 
             k4a_wait_result_t queue_capture_result = k4abt_tracker_enqueue_capture(tracker, sensor_capture, K4A_WAIT_INFINITE);
 
@@ -122,13 +122,16 @@ int main()
 
                   //Both sides
                   if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0] && body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
-                    printf("Joint[%d]: Position[mm] ( %f, %f, %f )\n",
-                        8, body.skeleton.joints[8].position.v[0], body.skeleton.joints[8].position.v[1], body.skeleton.joints[8].position.v[2]);
-                    printf("Joint[%d]: Position[mm] ( %f, %f, %f )\n",
-                        15, body.skeleton.joints[15].position.v[0], body.skeleton.joints[15].position.v[1], body.skeleton.joints[15].position.v[2]);
+                    //printf("Left Hand: Position[mm] ( %f, %f, %f )\n",
+                      //  body.skeleton.joints[8].position.v[0], body.skeleton.joints[8].position.v[1], body.skeleton.joints[8].position.v[2]);
+                    //printf("Right Hand: Position[mm] ( %f, %f, %f )\n",
+                      //  body.skeleton.joints[15].position.v[0], body.skeleton.joints[15].position.v[1], body.skeleton.joints[15].position.v[2]);
+
+                    float angle = atan2(body.skeleton.joints[8].position.v[1] - body.skeleton.joints[15].position.v[1], body.skeleton.joints[8].position.v[0] - body.skeleton.joints[15].position.v[0]) * 180 / PI
+                    printf("Hand angle: %f", angle)
                   }
                   else {
-                    printf("Nope");
+                    printf("Not in pose!");
                   }
 
                 }
