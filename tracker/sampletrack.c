@@ -113,8 +113,19 @@ int main()
                   //}
 
                   //RIGHT HAND
-                  if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
-                    printf("RH abv RE!\n");
+                  //if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
+                  //  printf("RH abv RE!\n");
+                  //}
+                  //else {
+                  //  printf("Nope");
+                  //}
+
+                  //Both sides
+                  if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0] && body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
+                    printf("Joint[%d]: Position[mm] ( %f, %f, %f )\n",
+                        8, body.skeleton.joints[8].position.v[0], body.skeleton.joints[8].position.v[1], body.skeleton.joints[8].position.v[2]);
+                    printf("Joint[%d]: Position[mm] ( %f, %f, %f )\n",
+                        15, body.skeleton.joints[15].position.v[0], body.skeleton.joints[15].position.v[1], body.skeleton.joints[15].position.v[2]);
                   }
                   else {
                     printf("Nope");
