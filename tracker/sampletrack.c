@@ -104,13 +104,13 @@ int main()
                   //printf("Body ID: %u\n", body.id);
                   //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
 
-                  //LEFT SIDE: tested and works
-                  if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0]){
-                    printf("LH abv LE!\n");
-                  }
-                  else {
-                    printf("Nope");
-                  }
+                  //LEFT SIDE: tested and mostly works
+                  //if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0]){
+                  //  printf("LH abv LE!\n");
+                  //}
+                  //else {
+                  //  printf("Nope");
+                  //}
 
                   //RIGHT HAND
                   if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
