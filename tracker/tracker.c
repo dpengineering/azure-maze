@@ -70,7 +70,7 @@ int main()
         {
             frame_count++;
 
-            printf("Start processing frame %d\n", frame_count);
+            //printf("Start processing frame %d\n", frame_count);
 
             k4a_wait_result_t queue_capture_result = k4abt_tracker_enqueue_capture(tracker, sensor_capture, K4A_WAIT_INFINITE);
 
@@ -92,7 +92,7 @@ int main()
             if (pop_frame_result == K4A_WAIT_RESULT_SUCCEEDED)
             {
                 uint32_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
-                printf("%u bodies are detected!\n", num_bodies);
+                //printf("%u bodies are detected!\n", num_bodies);
 
                 uint32_t c = 0; //closest user
                 for (uint32_t i = 0; i < num_bodies; i++) // Find the closest user and remember ID
@@ -120,18 +120,9 @@ int main()
 
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
                   int angle = radangle * 180 / 3.14;
-                  printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
-                  printf("Angle: %i\n", angle);
-
-
-                  // Open joint FIFO for write only
-                  fd = open(fifo, O_WRONLY | O_NONBLOCK);
-
-                  // Write the input on FIFO
-                  // and close it
-                  snprintf(arr,sizeof(arr),"%i",angle);
-                  write(fd, arr, strlen(arr)+1);
-                  close(fd);
+                  //printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
+                  //printf("Angle: %i\n", angle);
+                  printf("%i", angle);
 
                   k4abt_frame_release(body_frame);
                 }
