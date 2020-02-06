@@ -8,6 +8,12 @@
 
 #include <math.h>
 
+#include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #include <k4a/k4a.h>
 #include <k4abt.h>
 
@@ -50,6 +56,15 @@ void print_body_index_map_middle_line(k4a_image_t body_index_map)
 
 int main()
 {
+    //fifo setup
+    int fd;
+    char * fifo = "/tmp/fifo";
+    // Creating the named file(FIFO)
+    // mkfifo(<pathname>, <permission>)
+    mkfifo(fifo, 0666);
+    char arr[80];
+
+    //kinect setup
     k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
     device_config.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
 
@@ -123,13 +138,24 @@ int main()
                   VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &final_body.skeleton), "Get body from body frame failed!");
                   final_body.id = k4abt_frame_get_body_id(body_frame, c);
 
-                  float angle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
-                  angle = angle * 180 / 3.14;
-                  printf("Chest distance: %f\n", final_body.skeleton.joints[2].position.v[2]);
-                  printf("Angle: %f\n", angle);
+                  float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
+                  int angle = radangle * 180 / 3.14;
+                  printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
+                  printf("Angle: %i\n", angle);
+
+
+                  // Open joint FIFO for write only
+                  fd = open(fifo, O_WRONLY | O_NONBLOCK);
+
+                  // Write the input on FIFO
+                  // and close it
+                  snprintf(arr,sizeof(arr),"%i",angle);
+                  write(fd, arr, strlen(arr)+1);
+                  close(fd);
+
+                  k4abt_frame_release(body_frame);
                 }
 
-                k4abt_frame_release(body_frame);
 
                 }
 
