@@ -100,40 +100,22 @@ int main()
 
                 k4abt_body_t body;
                 if (num_bodies >= 1){
-                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, 0, &body.skeleton), "Get body from body frame failed!");
-                  body.id = k4abt_frame_get_body_id(body_frame, 0);
+                  for (uint32_t i = 0; i < num_bodies; i++)
+                  {
+                      k4abt_body_t body;
+                      VERIFY(k4abt_frame_get_body_skeleton(body_frame, i, &body.skeleton), "Get body from body frame failed!");
+                      body.id = k4abt_frame_get_body_id(body_frame, i);
 
-                  float angle = atan2 (body.skeleton.joints[8].position.v[1] - body.skeleton.joints[15].position.v[1], body.skeleton.joints[8].position.v[0] - body.skeleton.joints[15].position.v[0]);
-                  printf("Angle: %f\n", angle);
+                      printf("Body ID: %u\n", body.id);
+                      printf("Joint[%d]: Position[mm] ( %f, %f, %f )\n",
+                          2, body.skeleton.joints[2].position.v[0], body.skeleton.joints[2].position.v[1], body.skeleton.joints[2].position.v[2]);
+                      k4abt_frame_release(body_frame);
+                  }
+
 
 
                   //PROCESSING GOES HERE
-                  //printf("Body ID: %u\n", body.id);
-                  //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
 
-                  //LEFT SIDE: tested and mostly works
-                  //if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0]){
-                  //  printf("LH abv LE!\n");
-                  //}
-                  //else {
-                  //  printf("Nope");
-                  //}
-
-                  //RIGHT HAND
-                  //if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
-                  //  printf("RH abv RE!\n");
-                  //}
-                  //else {
-                  //  printf("Nope");
-                  //}
-
-
-
-                  //}
-                  //else {
-                  //  printf("None\n");
-                  //}
-                  k4abt_frame_release(body_frame);
 
                 }
 

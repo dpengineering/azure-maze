@@ -17,7 +17,7 @@ Instructions to install the Azure Kinect SDK are from microsoft, copied here for
 ```
 Note: requires OpenGL 4.4 and above,
 
-When installing Azure Kinect Samples:
+When installing Azure Kinect Samples (Git submodule info):
 https://github.com/microsoft/Azure-Kinect-Sensor-SDK/issues/896
 
 if device unavailable after compiling samples, run with sudo as rules not properly set.
@@ -27,6 +27,8 @@ if device unavailable after compiling samples, run with sudo as rules not proper
 As most Microsoft documentation is windows based, Linux usage will be documented as thoroughly as possible for future use. In general, follow instructions in the Microsoft documentation.
 
 To launch the Azure Kinect Viewer, run `k4aviewer` in the command line.
+
+Joints: x,y,z, measured in mm from the lens of the camera.
 
 ## Project Info ##
 C tracker code is mostly pulled from Microsoft sample code.
