@@ -98,46 +98,41 @@ int main()
                 uint32_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
                 printf("%u bodies are detected!\n", num_bodies);
 
-                k4abt_body_t body;
-                if (num_bodies >= 1){
-                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, 0, &body.skeleton), "Get body from body frame failed!");
-                  body.id = k4abt_frame_get_body_id(body_frame, 0);
+                uint32_t c = 0; //closest user
+                for (uint32_t i = 0; i < num_bodies; i++)
+                {
+                    k4abt_body_t body;
+                    k4abt_body_t cbody;
+                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, i, &body.skeleton), "Get body from body frame failed!");
+                    body.id = k4abt_frame_get_body_id(body_frame, i);
 
-                  float angle = atan2 (body.skeleton.joints[8].position.v[1] - body.skeleton.joints[15].position.v[1], body.skeleton.joints[8].position.v[0] - body.skeleton.joints[15].position.v[0]);
+                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &body.skeleton), "Get stored body from body frame failed!");
+                    cbody.id = k4abt_frame_get_body_id(body_frame, c);
+
+
+                    if (body.skeleton.joints[2].position.v[2] < cbody.skeleton.joints[2].position.v[2])
+                    {
+                      c = i;
+                    }
+                }
+
+                if (num_bodies >= 1)
+                {
+                  k4abt_body_t final_body;
+
+                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &final_body.skeleton), "Get body from body frame failed!");
+                  final_body.id = k4abt_frame_get_body_id(body_frame, c);
+
+                  float angle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
+                  angle = angle * 180 / 3.14;
+                  printf("Chest distance: %f\n", final_body.skeleton.joints[2].position.v[2]);
                   printf("Angle: %f\n", angle);
+                }
 
-
-                  //PROCESSING GOES HERE
-                  //printf("Body ID: %u\n", body.id);
-                  //LEFT HAND: 8 RIGHT HAND: 15 LEFT ELBOW: 6 RIGHT ELBOW: 13
-
-                  //LEFT SIDE: tested and mostly works
-                  //if (body.skeleton.joints[8].position.v[0] < body.skeleton.joints[6].position.v[0]){
-                  //  printf("LH abv LE!\n");
-                  //}
-                  //else {
-                  //  printf("Nope");
-                  //}
-
-                  //RIGHT HAND
-                  //if (body.skeleton.joints[15].position.v[0] < body.skeleton.joints[13].position.v[0]){
-                  //  printf("RH abv RE!\n");
-                  //}
-                  //else {
-                  //  printf("Nope");
-                  //}
-
-
-
-                  //}
-                  //else {
-                  //  printf("None\n");
-                  //}
-                  k4abt_frame_release(body_frame);
+                k4abt_frame_release(body_frame);
 
                 }
 
-              }
             else if (pop_frame_result == K4A_WAIT_RESULT_TIMEOUT)
             {
                 //  It should never hit timeout when K4A_WAIT_INFINITE is set.
