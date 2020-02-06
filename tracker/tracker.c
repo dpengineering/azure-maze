@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+//Modified for DPEA Kinetic Maze by Andrew Xie, Feb. 2020
+
 #include <assert.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -24,34 +26,13 @@
         exit(1);                                                                                         \
     }                                                                                                    \
 
+//for debugging the location of joints.
 void print_joint_information(int i, k4abt_body_t body)
 {
   k4a_float3_t position = body.skeleton.joints[i].position;
   k4abt_joint_confidence_level_t confidence_level = body.skeleton.joints[i].confidence_level;
   printf("Joint[%d]: Position[mm] ( %f, %f, %f ); Confidence Level (%d) \n",
       i, position.v[0], position.v[1], position.v[2], confidence_level);
-}
-
-void print_body_index_map_middle_line(k4a_image_t body_index_map)
-{
-    uint8_t* body_index_map_buffer = k4a_image_get_buffer(body_index_map);
-
-    // Given body_index_map pixel type should be uint8, the stride_byte should be the same as width
-    // TODO: Since there is no API to query the byte-per-pixel information, we have to compare the width and stride to
-    // know the information. We should replace this assert with proper byte-per-pixel query once the API is provided by
-    // K4A SDK.
-    assert(k4a_image_get_stride_bytes(body_index_map) == k4a_image_get_width_pixels(body_index_map));
-
-    int middle_line_num = k4a_image_get_height_pixels(body_index_map) / 2;
-    body_index_map_buffer = body_index_map_buffer + middle_line_num * k4a_image_get_width_pixels(body_index_map);
-
-    printf("BodyIndexMap at Line %d:\n", middle_line_num);
-    for (int i = 0; i < k4a_image_get_width_pixels(body_index_map); i++)
-    {
-        printf("%u, ", *body_index_map_buffer);
-        body_index_map_buffer++;
-    }
-    printf("\n");
 }
 
 int main()
@@ -114,7 +95,7 @@ int main()
                 printf("%u bodies are detected!\n", num_bodies);
 
                 uint32_t c = 0; //closest user
-                for (uint32_t i = 0; i < num_bodies; i++)
+                for (uint32_t i = 0; i < num_bodies; i++) // Find the closest user and remember ID
                 {
                     k4abt_body_t body;
                     k4abt_body_t cbody;
@@ -124,7 +105,6 @@ int main()
                     VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &body.skeleton), "Get stored body from body frame failed!");
                     cbody.id = k4abt_frame_get_body_id(body_frame, c);
 
-
                     if (body.skeleton.joints[2].position.v[2] < cbody.skeleton.joints[2].position.v[2])
                     {
                       c = i;
@@ -133,7 +113,7 @@ int main()
 
                 if (num_bodies >= 1)
                 {
-                  k4abt_body_t final_body;
+                  k4abt_body_t final_body; //track closest user's chest distance and hand angle.
 
                   VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &final_body.skeleton), "Get body from body frame failed!");
                   final_body.id = k4abt_frame_get_body_id(body_frame, c);
