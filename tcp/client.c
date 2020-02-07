@@ -13,8 +13,6 @@ void func(int sockfd)
         bzero(buff, sizeof(buff));
         read(sockfd, buff, sizeof(buff));
         printf("From Server : %s\n", buff);
-
-
     }
 }
 
