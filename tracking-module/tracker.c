@@ -37,9 +37,6 @@ void print_joint_information(int i, k4abt_body_t body)
 
 int main()
 {
-    //Make writing file
-    //FILE *fp = fopen("anglelog.txt", "w");
-    //fclose(fp);
 
     //kinect setup
     k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
@@ -60,8 +57,6 @@ int main()
     int frame_count = 0;
     while (true)
     {
-        //Open file to write data to
-        //FILE *fp = fopen("anglelog.txt", "a");
 
         k4a_capture_t sensor_capture;
         k4a_wait_result_t get_capture_result = k4a_device_get_capture(device, &sensor_capture, K4A_WAIT_INFINITE);
@@ -121,14 +116,10 @@ int main()
                   int angle = radangle * 180 / 3.14;
                   printf("Closest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
                   printf("Angle: %i\n", angle);
-                  //fprintf(fp,"%i\n", angle);
-                  //fclose(fp);
 
 
                 } else {
                   printf("No User Detected")
-                  //fprintf(fp,"%i\n", 0);
-                  //fclose(fp);
                 }
 
                 k4abt_frame_release(body_frame);
