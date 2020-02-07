@@ -37,14 +37,6 @@ void print_joint_information(int i, k4abt_body_t body)
 
 int main()
 {
-    //fifo setup
-    int fd;
-    char * fifo = "/tmp/fifo";
-    // Creating the named file(FIFO)
-    // mkfifo(<pathname>, <permission>)
-    mkfifo(fifo, 0666);
-    char arr[80];
-
     //kinect setup
     k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
     device_config.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
@@ -70,7 +62,7 @@ int main()
         {
             frame_count++;
 
-            //printf("Start processing frame %d\n", frame_count);
+            printf("Start processing frame %d\n", frame_count);
 
             k4a_wait_result_t queue_capture_result = k4abt_tracker_enqueue_capture(tracker, sensor_capture, K4A_WAIT_INFINITE);
 
@@ -92,7 +84,7 @@ int main()
             if (pop_frame_result == K4A_WAIT_RESULT_SUCCEEDED)
             {
                 uint32_t num_bodies = k4abt_frame_get_num_bodies(body_frame);
-                //printf("%u bodies are detected!\n", num_bodies);
+                printf("%u bodies are detected!\n", num_bodies);
 
                 uint32_t c = 0; //closest user
                 for (uint32_t i = 0; i < num_bodies; i++) // Find the closest user and remember ID
@@ -120,9 +112,8 @@ int main()
 
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
                   int angle = radangle * 180 / 3.14;
-                  //printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
-                  //printf("Angle: %i\n", angle);
-                  printf("%i", angle);
+                  printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
+                  printf("Angle: %i\n", angle);
 
                   k4abt_frame_release(body_frame);
                 }
