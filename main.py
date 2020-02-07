@@ -1,14 +1,9 @@
 import os
-import errno
 
-FIFO = '/tmp/fifo'
+kmm = None
 
+while True:
 
-print("Opening FIFO...")
-with open(FIFO) as fifo:
-    print("FIFO opened")
-    while True:
-        data = fifo.read()
-        if len(data) == 0:
-            print("Writer closed")
-        print('Read: "{0}"'.format(data))
+    with open('./tracking-module/anglelog.txt') as  f:
+        hist = list(f)
+        #Have way to remove history after writing? in C
