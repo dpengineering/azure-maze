@@ -6,7 +6,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #define MAX 80
-#define PORT 8080
+#define PORT 7266
 #define SA struct sockaddr
 
 // Function designed for chat between client and server.
@@ -16,12 +16,18 @@ void func(int sockfd)
     int n;
     for (;;) {
         bzero(buff, MAX);
+        n = 0;
         // copy server message in the buffer
         while ((buff[n++] = getchar()) != '\n')
             ;
 
         // and send that buffer to client
         write(sockfd, buff, sizeof(buff));
+
+        if (strncmp("exit", buff, 4) == 0) {
+            printf("Server Exit...\n");
+            break;
+        } 
 
     }
 }

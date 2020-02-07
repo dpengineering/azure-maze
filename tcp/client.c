@@ -4,16 +4,17 @@
 #include <string.h>
 #include <sys/socket.h>
 #define MAX 80
-#define PORT 8080
+#define PORT 7266
 #define SA struct sockaddr
 void func(int sockfd)
 {
     char buff[MAX];
-    int n;
     for (;;) {
         bzero(buff, sizeof(buff));
         read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
+        printf("From Server : %s\n", buff);
+
+
     }
 }
 
