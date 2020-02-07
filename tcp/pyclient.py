@@ -9,10 +9,15 @@ BUFFER_SIZE = 80
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect((TCP_IP, TCP_PORT))
 
 while True:
-    s.connect((TCP_IP, TCP_PORT))
     data = s.recv(BUFFER_SIZE)
-    s.close()
 
-    print "Received data:", data
+    print ("Init type:", type(data), "\n")
+    print("Pre-parse:", data, "\n")
+    data.decode('ascii')
+    print("Post-parse type:", type(data), "\n")
+    print("Post-parse:", data, "\n")
+
+s.close()
