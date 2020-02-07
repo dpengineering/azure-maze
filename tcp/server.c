@@ -27,7 +27,7 @@ void func(int sockfd)
         if (strncmp("exit", buff, 4) == 0) {
             printf("Server Exit...\n");
             break;
-        } 
+        }
 
     }
 }
