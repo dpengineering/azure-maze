@@ -37,6 +37,10 @@ void print_joint_information(int i, k4abt_body_t body)
 
 int main()
 {
+    //Make writing file
+    FILE *fp = fopen("anglelog.txt", "w");
+    fclose(fp);
+
     //kinect setup
     k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
     device_config.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
@@ -54,8 +58,11 @@ int main()
     VERIFY(k4abt_tracker_create(&sensor_calibration, tracker_config, &tracker), "Body tracker initialization failed!");
 
     int frame_count = 0;
-    do
+    while (true)
     {
+        //Open file to write data to
+        FILE *fp = fopen("anglelog.txt", "a");
+
         k4a_capture_t sensor_capture;
         k4a_wait_result_t get_capture_result = k4a_device_get_capture(device, &sensor_capture, K4A_WAIT_INFINITE);
         if (get_capture_result == K4A_WAIT_RESULT_SUCCEEDED)
@@ -112,13 +119,18 @@ int main()
 
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
                   int angle = radangle * 180 / 3.14;
-                  printf("Chest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
+                  printf("Closest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
                   printf("Angle: %i\n", angle);
+                  fprintf(fp,"%i\n", angle);
+                  fclose(fp);
 
-                  k4abt_frame_release(body_frame);
+
+                } else {
+                  fprintf(fp,"%i\n", 0);
+                  fclose(fp);
                 }
 
-
+                k4abt_frame_release(body_frame);
                 }
 
             else if (pop_frame_result == K4A_WAIT_RESULT_TIMEOUT)
@@ -140,9 +152,11 @@ int main()
             break;
         }
 
-    } while (true);
+    }
 
     printf("Finished body tracking processing!\n");
+
+
 
     k4abt_tracker_shutdown(tracker);
     k4abt_tracker_destroy(tracker);

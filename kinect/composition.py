@@ -1,5 +1,4 @@
 from .tracker import Tracker
-from .config import global_config as c
 from . import logger
 import os
 
@@ -17,9 +16,4 @@ class Kinect:
         self.tracker = Tracker(self.tracker_path, self.tracker_wd)
         l.info("Starting main loop")
         for angle in self.tracker.stream():
-            if angle is not None:
-                l.debug("Got angle: %1.2f", angle)
-                #ANGLE CODE HERE, angle goes from approx -0.5 to 0.5.
-            else:
-                #IF ANGLE EQUALS ZERO
-                l.debug("ZERO")
+                print(angle)
