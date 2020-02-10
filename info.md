@@ -1,5 +1,5 @@
 # Basic Info about Azure Maze #
-**Last Updated: Fev. 10 2020, by Andrew Xie**
+**Last Updated: Feb. 10 2020, by Andrew Xie**
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
