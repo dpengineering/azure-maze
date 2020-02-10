@@ -3,7 +3,7 @@ import math
 import odrive
 import contextlib
 import odrive.enums
-from configs.config import global_config as c
+#from configs.config import global_config as c
 
 ANGLE_NORMALIZATION = 1 / math.pi
 

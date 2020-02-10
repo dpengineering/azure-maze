@@ -177,7 +177,7 @@ int main()
 
 
                 } else {
-                  printf("No User Detected")
+                  printf("No User Detected");
                   write(connfd, 0, 4);
                 }
 
