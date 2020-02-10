@@ -1,5 +1,7 @@
 # Todo #
 
+CHECK IF SCRIPT WORKS WITH TCP, SERVER MUST BE STARTED FIRST!
+
 ### Short Term Todo ###
 See if 2D body tracking possible, merge with greenscreen to limit which user is tracked.
 
