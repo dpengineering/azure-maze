@@ -10,7 +10,7 @@ Hopefully this file makes the transition into this decently complex project easi
 ## Background ##
 Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 was from Paul, which was replaced with Version 2 from Braedan.
 
-V1 used C for tracking and Python for parsing, and V2 was written off a pure Python tracking implementation found by Braedan. [LINK TO GIT]. That implementation was found to have memory loss/packet loss issues over time, crashing after 5 minutes.
+[V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation found by Braedan. That implementation was found to have memory loss/packet loss issues over time, crashing after 5 minutes.
 
 Turns out MS (Microsoft) Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but is not written yet.
 
@@ -26,7 +26,7 @@ The rest of the folder is the Python that runs the ODrive based off data from th
 
 ### Files of interest ###
 
-Due to parsing data completely in C instead of in Python (see footnote), much of V1's code has been replaced. However referencing it may still be useful. [LINK TO COMMIT]
+Due to parsing data completely in C instead of in Python (see footnote), much of V1's code has been replaced. However referencing it may still be useful. [Here](https://github.com/dpengineering/kinetic-maze/tree/38de238fccfc4a8ec9930c75112bbee1b0594ff2) is one of the commits with most of V1 intact, but with more joints being output and a basic skeleton tracking attempt in Pygame added.
 
 Todo.md is more of a rambling ideas list, and the unimplemented ideas can be tested someday. (It's honestly disorganized enough that I can't make too much sense of most of it either).
 
