@@ -5,7 +5,6 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#define MAX 80
 #define PORT 7266
 #define SA struct sockaddr
 
@@ -13,9 +12,8 @@
 void func(int sockfd)
 {
   for(;;){
-    int angle = 180;
-    int convert = htonl(angle);
-    write(sockfd, &convert, sizeof(convert));
+    int angle = 9;
+    write(sockfd, &angle, 4);
   }
 }
 

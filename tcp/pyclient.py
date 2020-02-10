@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 import socket
+import sys
 
 
 TCP_IP = '127.0.0.1'
 TCP_PORT = 7266
-BUFFER_SIZE = 80
+BUFFER_SIZE = 4
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
