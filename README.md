@@ -30,12 +30,18 @@ To launch the Azure Kinect Viewer, run `k4aviewer` in the command line.
 
 Joints: x,y,z, measured in mm from the lens of the camera.
 
-## Project Info ##
-C tracker code is mostly pulled from Microsoft sample code.
+## How to Run ##
+Compile the tracker by running:
+```
+make
+```
+(In the subfolder).
 
-Current plan: Create two FIFO pipes, one for image data and one for joint (aka hand angle) data. Then figure out how to access those from python, or another C program. May want to convert entire project to C, but unlikely.
+From the project directory:
+```
+./run.sh
+```
 
-See todo for plans.
 
 
 

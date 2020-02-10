@@ -16,6 +16,7 @@ BUFFER_SIZE = 4
 #Odrive setup
 motor = KineticMazeMotor()
 
+#ADD CALIBRATION CODE
 
 #Bind to socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
