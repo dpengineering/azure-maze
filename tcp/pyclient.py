@@ -16,8 +16,10 @@ while True:
 
     print ("Init type:", type(data), "\n")
     print("Pre-parse:", data, "\n")
-    data.decode('ascii')
-    print("Post-parse type:", type(data), "\n")
-    print("Post-parse:", data, "\n")
+
+    pardata = int.from_bytes(data, byteorder='little')
+
+    print("Post-parse type:", type(pardata), "\n")
+    print("Post-parse:", pardata, "\n")
 
 s.close()
