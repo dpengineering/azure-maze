@@ -5,7 +5,7 @@ This project will be documented in order to avoid the mess of almost all other D
 
 Hopefully this file makes the transition into this decently complex project easier.
 
-*Please update this file when major changes are made, new functionality added, or problems that may be encountered by others solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects.
+*Please update this file when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects.
 
 ## Background ##
 Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 was from Paul, which was replaced with Version 2 from Braedan.

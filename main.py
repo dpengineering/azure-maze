@@ -14,12 +14,16 @@ TCP_IP = '127.0.0.1'
 TCP_PORT = 7266
 BUFFER_SIZE = 4
 
-#Odrive setup, auto calibrate/initializes
-motor = KineticMazeMotor()
+
 
 #Bind to socket
+print("[Py] Starting socket client...")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((TCP_IP, TCP_PORT))
+print("[Py] Socket connected!")
+
+#Odrive setup, auto calibrate/initializes
+motor = KineticMazeMotor()
 
 while True:
     data = s.recv(BUFFER_SIZE)
@@ -33,10 +37,8 @@ while True:
     #print("Post-proc raw:", angle, "\n")
 
     if angle != 0:
-        print("Goin somewhere")
         motor.set_velocity(motor.adjust_angle(math.radians(angle)))
     else:
-        print("Stopping")
         motor.set_velocity(motor.ramp_down())
 
 #Close socket if main loop broken

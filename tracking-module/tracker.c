@@ -54,11 +54,11 @@ int main()
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd == -1) {
-        printf("Socket creation failed!\n");
+        printf("[C] Socket creation failed!\n");
         exit(0);
     }
     else
-        printf("Socket successfully created!\n");
+        printf("[C] Socket successfully created!\n");
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -68,45 +68,45 @@ int main()
 
     // Binding newly created socket to given IP and verification
     if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
-        printf("Socket bind failed!\n");
+        printf("[C] Socket bind failed!\n");
         exit(0);
     }
     else
-        printf("Socket successfully bound!\n");
+        printf("[C] Socket successfully bound!\n");
 
     // Now server is ready to listen and verification
     if ((listen(sockfd, 5)) != 0) {
-        printf("Listen failed!\n");
+        printf("[C] Listen failed!\n");
         exit(0);
     }
     else
-        printf("Server listening for verification!\n");
+        printf("[C] Server listening for verification!\n");
     len = sizeof(cli);
 
     // Accept the data packet from client and verification
     connfd = accept(sockfd, (SA*)&cli, &len);
     if (connfd < 0) {
-        printf("Verification failed!\n");
+        printf("[C] Verification failed!\n");
         exit(0);
     }
     else
-        printf("Client accepted! Starting Kinect...\n");
+        printf("[C] Client accepted! Starting Kinect...\n");
 
     //kinect setup
     k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
     device_config.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
 
     k4a_device_t device;
-    VERIFY(k4a_device_open(0, &device), "Open K4A Device failed!");
-    VERIFY(k4a_device_start_cameras(device, &device_config), "Start K4A cameras failed!");
+    VERIFY(k4a_device_open(0, &device), "[C] Open K4A Device failed!");
+    VERIFY(k4a_device_start_cameras(device, &device_config), "[C] Start K4A cameras failed!");
 
     k4a_calibration_t sensor_calibration;
     VERIFY(k4a_device_get_calibration(device, device_config.depth_mode, K4A_COLOR_RESOLUTION_OFF, &sensor_calibration),
-        "Get depth camera calibration failed!");
+        "[C] Get depth camera calibration failed!");
 
     k4abt_tracker_t tracker = NULL;
     k4abt_tracker_configuration_t tracker_config = K4ABT_TRACKER_CONFIG_DEFAULT;
-    VERIFY(k4abt_tracker_create(&sensor_calibration, tracker_config, &tracker), "Body tracker initialization failed!");
+    VERIFY(k4abt_tracker_create(&sensor_calibration, tracker_config, &tracker), "[C] Body tracker initialization failed!");
 
     int frame_count = 0;
     while (true)
@@ -126,12 +126,12 @@ int main()
             if (queue_capture_result == K4A_WAIT_RESULT_TIMEOUT)
             {
                 // It should never hit timeout when K4A_WAIT_INFINITE is set.
-                printf("Error! Add capture to tracker process queue timeout!\n");
+                printf("[C] Error! Add capture to tracker process queue timeout!\n");
                 break;
             }
             else if (queue_capture_result == K4A_WAIT_RESULT_FAILED)
             {
-                printf("Error! Add capture to tracker process queue failed!\n");
+                printf("[C] Error! Add capture to tracker process queue failed!\n");
                 break;
             }
 
@@ -147,10 +147,10 @@ int main()
                 {
                     k4abt_body_t body;
                     k4abt_body_t cbody;
-                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, i, &body.skeleton), "Get body from body frame failed!");
+                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, i, &body.skeleton), "[C] Get body from body frame failed!");
                     body.id = k4abt_frame_get_body_id(body_frame, i);
 
-                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &body.skeleton), "Get stored body from body frame failed!");
+                    VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &body.skeleton), "[C] Get stored body from body frame failed!");
                     cbody.id = k4abt_frame_get_body_id(body_frame, c);
 
                     if (body.skeleton.joints[2].position.v[2] < cbody.skeleton.joints[2].position.v[2])
@@ -163,7 +163,7 @@ int main()
                 {
                   k4abt_body_t final_body; //track closest user's chest distance and hand angle.
 
-                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &final_body.skeleton), "Get body from body frame failed!");
+                  VERIFY(k4abt_frame_get_body_skeleton(body_frame, c, &final_body.skeleton), "[C] Get body from body frame failed!");
                   final_body.id = k4abt_frame_get_body_id(body_frame, c);
 
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
@@ -187,25 +187,25 @@ int main()
             else if (pop_frame_result == K4A_WAIT_RESULT_TIMEOUT)
             {
                 //  It should never hit timeout when K4A_WAIT_INFINITE is set.
-                printf("Error! Pop body frame result timeout!\n");
+                printf("[C] Error! Pop body frame result timeout!\n");
                 break;
             }
           }
         else if (get_capture_result == K4A_WAIT_RESULT_TIMEOUT)
         {
             // It should never hit time out when K4A_WAIT_INFINITE is set.
-            printf("Error! Get depth frame time out!\n");
+            printf("[C] Error! Get depth frame time out!\n");
             break;
         }
         else
         {
-            printf("Get depth capture returned error: %d\n", get_capture_result);
+            printf("[C] Get depth capture returned error: %d\n", get_capture_result);
             break;
         }
 
     }
 
-    printf("Finished body tracking processing!\n");
+    printf("[C] Finished body tracking processing!\n");
 
 
 
