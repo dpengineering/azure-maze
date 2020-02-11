@@ -3,6 +3,7 @@
 import os
 import socket
 import sys
+import math
 
 from physics import KineticMazeMotor
 
@@ -14,7 +15,7 @@ TCP_PORT = 7266
 BUFFER_SIZE = 4
 
 #Odrive setup, auto calibrate/initializes
-#motor = KineticMazeMotor()
+motor = KineticMazeMotor()
 
 #Bind to socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,10 +34,10 @@ while True:
 
     if angle != 0:
         print("Goin somewhere")
-        #motor.set_velocity(motor.adjust_angle(math.radians(angle)))
+        motor.set_velocity(motor.adjust_angle(math.radians(angle)))
     else:
         print("Stopping")
-        #motor.set_velocity(motor.ramp_down())
+        motor.set_velocity(motor.ramp_down())
 
 #Close socket if main loop broken
 s.close()

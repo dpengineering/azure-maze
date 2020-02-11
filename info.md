@@ -5,7 +5,7 @@ This project will be documented in order to avoid the mess of almost all other D
 
 Hopefully this file makes the transition into this decently complex project easier.
 
-*Please update this file when major changes are made, new functionality added, or problems that may be encountered by others solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects
+*Please update this file when major changes are made, new functionality added, or problems that may be encountered by others solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects.
 
 ## Background ##
 Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 was from Paul, which was replaced with Version 2 from Braedan.
@@ -43,7 +43,7 @@ The C tracker is built off MS Azure Kinect sample code, from a program called si
 The original motor control code from V1, which could not be replaced due to heavy customization and JSON configs. The JSON configs will eventually be replaced with variables directly in the code.
 
 #### run.sh ####
-The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf).
+The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf) (> /dev/null 2>&1).
 
 ## Previously Tested Features/Issues + Lessons learned ##
 
