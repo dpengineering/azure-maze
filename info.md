@@ -43,7 +43,7 @@ The C tracker is built off MS Azure Kinect sample code, from a program called si
 The original motor control code from V1, which could not be replaced due to heavy customization and JSON configs. The JSON configs will eventually be replaced with variables directly in the code.
 
 #### run.sh ####
-The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf) (> /dev/null 2>&1).
+The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf) (> /dev/null 2>&1). **If the C program fails to create/bind a socket, exit asap and restart!**
 
 ## Previously Tested Features/Issues + Lessons learned ##
 
@@ -55,9 +55,11 @@ The run script is more complex than V1's, as the C server needs to be started sl
     - TCP socket transfer: Currently implemented method of data transfer, works well for sending the angle over.
 - Motor control
   - *V1-3 all use the original physics.py.* A simplifying rewrite may be needed, but usage as a black box works well enough that this is not a priority.
+  - physics.py can be a bit iffy, when rebooting remember to also cycle *all* the power strips to reset odrive, and to unplug everything from the Kinect for a full reset.
 - Azure Kinect
   - Most Azure problems have solutions in the SDK Issues page, in the docs, or sample code. Check those carefully first!
   - Don't forget to release the frame after use.
+
 
 ### Generic lessons ###
 **Check Issues from Github code that you're copying before you copy, they might reveal some problems that would break your code.** For example, the code used for V2 had an Issue from Jan. 2019 about memory loss that wasn't addressed, and if we saw that before we could've saved three months worth of work.
