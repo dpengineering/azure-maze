@@ -1,5 +1,5 @@
 # Basic Info about Azure Maze #
-**Last Updated: Feb. 10 2020, by Andrew Xie**
+**Last Updated: Feb. 11 2020, by Andrew Xie**
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
@@ -69,14 +69,19 @@ The run script is more complex than V1's, as the C server needs to be started sl
 ### Documentation ###
 
 [Azure Kinect Samples](https://github.com/microsoft/Azure-Kinect-Samples)
+
 [Azure Kinect SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
+
 [Azure Kinect DK Documentation](https://docs.microsoft.com/en-us/azure/kinect-dk/)
+
 [Body Tracking SDK Reference](https://microsoft.github.io/Azure-Kinect-Body-Tracking/release/1.x.x/index.html)
+
 [Azure Kinect Sensor SDK Reference](https://microsoft.github.io/Azure-Kinect-Sensor-SDK/master/index.html)
 
 ### Old Code ###
 
 [Kinetic Maze V1, pre-2019](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097)
+
 [Kinetic Maze V2 (Reborn), Nov 2019 - Jan 2020](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn)
 
 ### Footnotes ###
