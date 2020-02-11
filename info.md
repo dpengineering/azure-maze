@@ -14,7 +14,11 @@ Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1
 
 Turns out MS (Microsoft) Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but is not written yet.
 
-## Project Structure, Files/Purpose ##
+## V.1 Project Structure, Files/Purpose ##
+
+## V.2 Project Structure, Files/Purpose ##
+
+## V.3 Project Structure, Files/Purpose ##
 
 ### Subfolders ###
 * /tracking stores the C tracker.
@@ -38,9 +42,12 @@ The C tracker is built off MS Azure Kinect sample code, from a program called si
 #### physics.py ####
 The original motor control code from V1, which could not be replaced due to heavy customization and JSON configs. The JSON configs will eventually be replaced with variables directly in the code.
 
+#### run.sh ####
+The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf).
+
 ## Previously Tested Features/Issues + Lessons learned ##
 
-### Specific issues ###
+### Specific issues/solutions/implementations ###
 - C to Python data transfer
   - V1: printing via STDOUT, Python reads STDOUT
   - V3:
@@ -59,15 +66,20 @@ The original motor control code from V1, which could not be replaced due to heav
 
 ## Footnotes and Important links ##
 
+### Documentation ###
+
 [Azure Kinect Samples](https://github.com/microsoft/Azure-Kinect-Samples)
-
 [Azure Kinect SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK)
-
 [Azure Kinect DK Documentation](https://docs.microsoft.com/en-us/azure/kinect-dk/)
-
 [Body Tracking SDK Reference](https://microsoft.github.io/Azure-Kinect-Body-Tracking/release/1.x.x/index.html)
-
 [Azure Kinect Sensor SDK Reference](https://microsoft.github.io/Azure-Kinect-Sensor-SDK/master/index.html)
+
+### Old Code ###
+
+[Kinetic Maze V1, pre-2019](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097)
+[Kinetic Maze V2 (Reborn), Nov 2019 - Jan 2020](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn)
+
+### Footnotes ###
 
 [1]: V1 sent all the raw joint info to Python via STDOUT. The C program printf'd the data, and Python read STDOUT and parsed the data. V3 does all the calculations before sending, and sends the angle in degrees. Note that V1 parsed the angle data to radians.
 

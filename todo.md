@@ -1,14 +1,9 @@
 # Todo #
 
-CHECK IF SCRIPT WORKS WITH TCP, SERVER MUST BE STARTED FIRST!
-
 ### Short Term Todo ###
-See if 2D body tracking possible, merge with greenscreen to limit which user is tracked.
+See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own.
 
-
-See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own, while python only controls motors and parsing of angles, as images are not easily passed through FIFO pipes. Again, priority is to getting the game back into a working state, without a full GUI with menus and such. After that, then pass image to pygame and make GUIs.
-
-After C tracker is confirmed to work (print out angle, figure out access with a python program, maybe by seeing what happens to the fifo file when written to), then reimplement all of game.
+Fix output, both C and python output to the same place right now.
 
 #### Software tests,beyond basic working state ####
 Can Azure output body tracking image in 2D? How can this image be passed to python for a pygame GUI?
@@ -31,8 +26,6 @@ ADMIN SCREEN: Series of hardware switches to act as kill switches on various com
 
 
 ### Notes ###
-FIFO write by writing and rewriting the first line of the file it makes (currently in tmp).
-UArm tracking (arms in |\_o\_| shape) works decently, right arm needs to be slightly out though.
 User numbers seem to be kept when other users leave, however simple_3d_tracker sometimes will display multiple people as the same color, which means same index?
 
 
