@@ -169,7 +169,7 @@ int main()
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
                   int angle = radangle * 180 / 3.14;
                   //printf("Closest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
-                  printf("[C] Angle: %i\n", angle);
+                  //printf("[C] Angle: %i\n", angle);
 
                   write(connfd, &angle, 4);
 
@@ -177,7 +177,7 @@ int main()
 
 
                 } else {
-                  printf("[C] No User Detected");
+                  //printf("[C] No User Detected\n");
                   write(connfd, 0, 4);
                 }
 

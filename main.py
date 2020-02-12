@@ -23,8 +23,9 @@ s.connect((TCP_IP, TCP_PORT))
 print("[Py] Socket connected!")
 
 #Odrive setup, auto calibrate/initializes
-motor = KineticMazeMotor()
+#motor = KineticMazeMotor()
 
+print("Beginning control loop!\n")
 while True:
     data = s.recv(BUFFER_SIZE)
 
@@ -34,12 +35,13 @@ while True:
     angle = int.from_bytes(data, byteorder='little')
 
     #print("Post-proc type:", type(angle), "\n")
-    #print("Post-proc raw:", angle, "\n")
+    print("Post-proc raw:", angle, "\n")
 
-    if angle != 0:
-        motor.set_velocity(motor.adjust_angle(math.radians(angle)))
-    else:
-        motor.set_velocity(motor.ramp_down())
+    #if angle not in range(20,-20):
+    #        motor.set_velocity(motor.adjust_angle(math.radians(angle)))
+
+    #else:
+    #    motor.set_velocity(motor.ramp_down())
 
 #Close socket if main loop broken
 s.close()
