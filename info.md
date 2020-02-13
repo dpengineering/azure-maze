@@ -1,9 +1,9 @@
 # Basic Info about Azure Maze #
-**Last Updated: Feb. 11 2020, by Andrew Xie**
+**Last Updated: Feb. 12 2020, by Andrew Xie**
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
-Hopefully this file makes the transition into this decently complex project easier.
+Hopefully this file makes the transition into this decently complex project easier. Instructions on running the project will be stored in the readme.
 
 *Please update this file when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects.
 
@@ -15,8 +15,22 @@ Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1
 Turns out MS (Microsoft) Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but is not written yet.
 
 ## V.1 Project Structure, Files/Purpose ##
+V1 is run via a shell script, and has a similar format to V3, since you have to run ```make``` in the tracker directory.
+
+This program is a useful starting point for learning about the project's structure (via following import statements around different files), and a good study of using logger. However, now that Azure Maze has reached the same point in a more simple way, and likely will be the hardware/version used for future builds, it's more highly recommended to study how Azure Maze works.
 
 ## V.2 Project Structure, Files/Purpose ##
+V2 is run directly through ```python3 main.py```. The current implementation has a interactive GUI and score input screen, however suffers **severe** memory/packet loss and will crash after 4 minutes max. Instead of using a C tracker, V2 uses a NiTE/OpenNI2 Python tracker stored in the submodule Kinect_Skeleton_Tracker, which needs to be initialized before running the program!
+
+The primary purpose of V2 after being abandoned is to act as a demo for a pygame GUI that can be interacted with by a body tracker.
+
+Likely cause of the memory loss is not releasing the tracked frame after being used, as the Azure Kinect requires. Finding a function to do that in the library will be needed, or adding a command to the library. As I could not find where the library is stored, this was not done and so there is no confirmation that releasing the frame will fix the packet loss.
+
+### The V2 GUI ###
+The GUI is 100% button based. Buttons are pressed by holding a hand over the button (so the onscreen location of the tracked hand, indicated with a circle drawn around the hand joint, is on the button), and the button will fade from green to red over a short time. This is to prevent accidental button presses, and is possible to disable.
+
+Screens are displayed via a variable that saves the name of the current screen, and an if statement within the loop checks which "gamestate" (the screen name) is displayed and renders accordingly. Each loop deals with a single frame of tracked data.
+
 
 ## V.3 Project Structure, Files/Purpose ##
 
