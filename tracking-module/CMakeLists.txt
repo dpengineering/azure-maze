@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.9.0)
 cmake_policy(SET CMP0048 NEW)
 
-project(trackhands C)
+project(trackhands)
 
 FIND_PACKAGE(k4a REQUIRED)
 FIND_PACKAGE(k4abt REQUIRED)
@@ -11,7 +11,7 @@ FIND_PACKAGE(k4abt REQUIRED)
 
 add_subdirectory(libs)
 
-add_executable(trackhands tracker.c)
+add_executable(trackhands tracker.cpp)
 
 target_include_directories(trackhands PRIVATE ../libs/k4abt_headers)
 target_link_libraries(trackhands PRIVATE
