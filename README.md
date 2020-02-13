@@ -42,6 +42,8 @@ From the project directory:
 ./run.sh
 ```
 
+If the program crashes, current method of resetting is to restart the computer to free port 7266. Also, to reset the ODrive, wait for the fan on the power supply to stop before turning the power strip back on, to ensure power to the ODrive actually cut.
+
 
 
 
