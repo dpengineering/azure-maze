@@ -16,7 +16,7 @@ add_library(window_controller_3d STATIC
             WindowController3d.cpp
             glad/glad.c)
 
-target_include_directories(window_controller_3d PRIVATE ../../k4abt_headers)
+target_include_directories(window_controller_3d PRIVATE ../../k4abt_libs)
 
 target_include_directories(window_controller_3d PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

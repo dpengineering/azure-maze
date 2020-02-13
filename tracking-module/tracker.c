@@ -31,12 +31,8 @@
 #define SA struct sockaddr
 
 //Skeleton display Libs
-#include <array>
-#include <iostream>
-#include <map>
-#include <vector>
+
 #include <BodyTrackingHelpers.h>
-#include <Utilities.h>
 #include <Window3dWrapper.h>
 
 
