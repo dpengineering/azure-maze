@@ -47,17 +47,12 @@ The Python ODrive control is sensitive to the given angle, so the ramp_down zone
 
 ### Subfolders ###
 * /tracking-module stores the C tracker.
-* /testing contains the programs used to test possible solutions to problems encountered, and is kept to either test functions without the rest of the maze, or for future testing.
 
-Note that testing may not be updated along with the main project, so the main project's implementations of testing code may differ greatly from what's in /testing.
-
-The rest of the folder is the Python that runs the ODrive based off data from the C tracker, or misc files such as the license, readme, and todo.
+The rest of the folder is the Python that runs the ODrive based off data from the C tracker, or misc files such as the license, and readme.
 
 ### Files of interest ###
 
 Due to parsing data completely in C instead of in Python (see footnote), much of V1's code has been replaced. However referencing it may still be useful. [Here](https://github.com/dpengineering/kinetic-maze/tree/38de238fccfc4a8ec9930c75112bbee1b0594ff2) is one of the commits with most of V1 intact, but with more joints being output and a basic skeleton tracking attempt in Pygame added.
-
-Todo.md is more of a rambling ideas list, and the unimplemented ideas can be tested someday. (It's honestly disorganized enough that I can't make too much sense of most of it either).
 
 #### The C tracker ####
 The C tracker is built off MS Azure Kinect sample code, from a program called simple_sample. It takes the joint data, accesses the hand data, and calculates the angle between the hands of the closest user (found by measuring Z) using atan2 and the X/Y coordinates of the hands. This angle data is then sent along a TCP socket bound to 127.0.0.1, port 7266 [1].
@@ -72,7 +67,7 @@ The run script is more complex than V1's, as the C server needs to be started sl
 
 ## Previously Tested Features/Issues + Lessons learned ##
 
-Basic implementations of these features can be found via google or in /testing, sample code may be added to this doc in the future.
+Basic implementations of these features can be found via Google, sample code may be added to this doc in the future.
 
 ### Specific issues/solutions/implementations ###
 - C to Python data transfer
