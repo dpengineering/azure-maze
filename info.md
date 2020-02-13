@@ -1,6 +1,12 @@
 # Basic Info about Azure Maze #
 **Last Updated: Feb. 12 2020, by Andrew Xie**
 
+| Date | Project Status |
+|------|------|
+| 1/29/2020 | Azure Kinect software setup, code and repository prepared for hardware. |
+| 1/31/2020 | First Azure Kinect arrived at DPEA. |
+| 2/12/2020 | Reached working status with motors, minimum viable product. |
+
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
 Hopefully this file makes the transition into this decently complex project easier. Instructions on running the project will be stored in the readme.
