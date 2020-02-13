@@ -149,9 +149,15 @@ class KineticMazeMotor:
 
             self.approx_cycles_per_revolution = abs(delta)
 
+            print("Setting velocity 0...")
+
             self.set_velocity(0, wait=True)
 
+            print("Going home...")
+
             self.go_to_angle(0)
+
+            print("Setting Velocity 0...")
 
             self.set_velocity(0, wait=True)
 
