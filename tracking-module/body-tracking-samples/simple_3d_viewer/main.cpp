@@ -13,62 +13,12 @@
 #include <Utilities.h>
 #include <Window3dWrapper.h>
 
-void PrintUsage()
-{
-    printf("\nUSAGE: (k4abt_)simple_3d_viewer.exe SensorMode[NFOV_UNBINNED, WFOV_BINNED](optional) RuntimeMode[CPU](optional)\n");
-    printf("  - SensorMode: \n");
-    printf("      NFOV_UNBINNED (default) - Narraw Field of View Unbinned Mode [Resolution: 640x576; FOI: 75 degree x 65 degree]\n");
-    printf("      WFOV_BINNED             - Wide Field of View Binned Mode [Resolution: 512x512; FOI: 120 degree x 120 degree]\n");
-    printf("  - RuntimeMode: \n");
-    printf("      CPU - Use the CPU only mode. It runs on machines without a GPU but it will be much slower\n");
-    printf("e.g.   (k4abt_)simple_3d_viewer.exe WFOV_BINNED CPU\n");
-    printf("e.g.   (k4abt_)simple_3d_viewer.exe CPU\n");
-    printf("e.g.   (k4abt_)simple_3d_viewer.exe WFOV_BINNED\n");
-}
 
-void PrintAppUsage()
-{
-    printf("\n");
-    printf(" Basic Navigation:\n\n");
-    printf(" Rotate: Rotate the camera by moving the mouse while holding mouse left button\n");
-    printf(" Pan: Translate the scene by holding Ctrl key and drag the scene with mouse left button\n");
-    printf(" Zoom in/out: Move closer/farther away from the scene center by scrolling the mouse scroll wheel\n");
-    printf(" Select Center: Center the scene based on a detected joint by right clicking the joint with mouse\n");
-    printf("\n");
-    printf(" Key Shortcuts\n\n");
-    printf(" ESC: quit\n");
-    printf(" h: help\n");
-    printf(" b: body visualization mode\n");
-    printf(" k: 3d window layout\n");
-    printf("\n");
-}
-
-// Global State and Key Process Function
+// Global State
 bool s_isRunning = true;
 Visualization::Layout3d s_layoutMode = Visualization::Layout3d::OnlyMainView;
 bool s_visualizeJointFrame = false;
 
-int64_t ProcessKey(void* /*context*/, int key)
-{
-    // https://www.glfw.org/docs/latest/group__keys.html
-    switch (key)
-    {
-        // Quit
-    case GLFW_KEY_ESCAPE:
-        s_isRunning = false;
-        break;
-    case GLFW_KEY_K:
-        s_layoutMode = (Visualization::Layout3d)(((int)s_layoutMode + 1) % (int)Visualization::Layout3d::Count);
-        break;
-    case GLFW_KEY_B:
-        s_visualizeJointFrame = !s_visualizeJointFrame;
-        break;
-    case GLFW_KEY_H:
-        PrintAppUsage();
-        break;
-    }
-    return 1;
-}
 
 int64_t CloseCallback(void* /*context*/)
 {
@@ -76,53 +26,18 @@ int64_t CloseCallback(void* /*context*/)
     return 1;
 }
 
-struct InputSettings
-{
-    k4a_depth_mode_t DepthCameraMode = K4A_DEPTH_MODE_NFOV_UNBINNED;
-    bool CpuOnlyMode = false;
-};
 
-bool ParseInputSettingsFromArg(int argc, char** argv, InputSettings& inputSettings)
-{
-    for (int i = 1; i < argc; i++)
-    {
-        std::string inputArg(argv[i]);
-        if (inputArg == std::string("NFOV_UNBINNED"))
-        {
-            inputSettings.DepthCameraMode = K4A_DEPTH_MODE_NFOV_UNBINNED;
-        }
-        else if (inputArg == std::string("WFOV_BINNED"))
-        {
-            inputSettings.DepthCameraMode = K4A_DEPTH_MODE_WFOV_2X2BINNED;
-        }
-        else if (inputArg == std::string("CPU"))
-        {
-            inputSettings.CpuOnlyMode = true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-    return true;
-}
 
-int main(int argc, char** argv)
+
+int main()
 {
-    InputSettings inputSettings;
-    if (!ParseInputSettingsFromArg(argc, argv, inputSettings))
-    {
-        PrintUsage();
-        return -1;
-    }
-    PrintAppUsage();
 
     k4a_device_t device = nullptr;
     VERIFY(k4a_device_open(0, &device), "Open K4A Device failed!");
 
     // Start camera. Make sure depth camera is enabled.
     k4a_device_configuration_t deviceConfig = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
-    deviceConfig.depth_mode = inputSettings.DepthCameraMode;
+    deviceConfig.depth_mode = K4A_DEPTH_MODE_NFOV_UNBINNED;
     deviceConfig.color_resolution = K4A_COLOR_RESOLUTION_OFF;
     VERIFY(k4a_device_start_cameras(device, &deviceConfig), "Start K4A cameras failed!");
 
@@ -136,13 +51,12 @@ int main(int argc, char** argv)
     // Create Body Tracker
     k4abt_tracker_t tracker = nullptr;
     k4abt_tracker_configuration_t tracker_config = K4ABT_TRACKER_CONFIG_DEFAULT;
-    tracker_config.processing_mode = inputSettings.CpuOnlyMode ? K4ABT_TRACKER_PROCESSING_MODE_CPU : K4ABT_TRACKER_PROCESSING_MODE_GPU;
+    tracker_config.processing_mode = K4ABT_TRACKER_PROCESSING_MODE_GPU;
     VERIFY(k4abt_tracker_create(&sensorCalibration, tracker_config, &tracker), "Body tracker initialization failed!");
     // Initialize the 3d window controller
     Window3dWrapper window3d;
     window3d.Create("3D Visualization", sensorCalibration);
     window3d.SetCloseCallback(CloseCallback);
-    window3d.SetKeyCallback(ProcessKey);
 
     while (s_isRunning)
     {
