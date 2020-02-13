@@ -3,15 +3,10 @@
 ### Short Term Todo ###
 See if body tracking SDK sample draws the skeleton. If so, potentially have it draw on its own.
 
-Fix output, both C and python output to the same place right now.
-
 #### Software tests,beyond basic working state ####
 Can Azure output body tracking image in 2D? How can this image be passed to python for a pygame GUI?
 Might need a GUI concept redesign to better fit the project, if needed just slap an arcade joystick on? Or a bluetooth remote? Some sort of station on an arm from the project that can telescope out to where the user would be standing and retract when the game starts?
 
-ALTERNATIVELY
-Can green screen have numbers written on the sides instead of body tracking, display coordinate difference or some arbitrary value tied to the angle?
-How does green screen work?
 
 ##### UI Ideas #####
 Maybe a pose detector and afk. AFK loop with a welcome message, then when someone approaches and gets in the pose the game detects, gives a few seconds to confirm, starts a countdown to start the game, starts the game, and if completed, if score in the HS list then assign a automatically generated user ID and register, if not show high scores regardless, then go back to afk loop.
@@ -20,14 +15,9 @@ If afk detected (original pose user gone), return to the timer, when timer runs 
 
 This would allow for a minimal GUI, mostly consisting of text. Could even use a LED strip and have scrolling instructions, instead of displaying also on the screen (which would be pretty small and hard to read from a distance anyways, especially if it's on a boom).
 
-Also write up the user instructions for minimal guidance.
+Also write up the user instructions for minimal guidance, to be put on a plaque like Infinity Mirror's?
 
-ADMIN SCREEN: Series of hardware switches to act as kill switches on various components?  Key, etc.
-
-
-### Notes ###
-User numbers seem to be kept when other users leave, however simple_3d_tracker sometimes will display multiple people as the same color, which means same index?
-
+ADMIN SCREEN: Series of hardware switches to act as kill switches on various components?  Master key, etc.
 
 
 #### Long Term Todo ####

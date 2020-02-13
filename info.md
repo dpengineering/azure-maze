@@ -9,16 +9,16 @@
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
-Hopefully this file makes the transition into this decently complex project easier. Instructions on running the project will be stored in the readme.
+Hopefully this file makes the transition into this project easier. Instructions on running the project will be stored in the readme.
 
-*Please update this file when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part in preventing this from becoming the non-documented (Or inadequately documented) mess typical of other DPEA projects.
+*Please update this file (and the timeline table) when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part to keep this the most thoroughly documented DPEA project!
 
 ## Background ##
-Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 was from Paul, which was replaced with Version 2 from Braedan.
+Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 (V1) was written by Paul, which was replaced with Version 2 (V2) written by Braedan.
 
-[V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation found by Braedan. That implementation was found to have memory loss/packet loss issues over time, crashing after 5 minutes.
+[V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation found by Braedan. That implementation was found to have memory loss/packet loss issues over time, crashing after 3 minutes.
 
-Turns out MS (Microsoft) Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but is not written yet.
+Turns out Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but most of the code should be self-explanatory.
 
 ## V.1 Project Structure, Files/Purpose ##
 V1 is run via a shell script, and has a similar format to V3, since you have to run ```make``` in the tracker directory.
@@ -32,16 +32,21 @@ The primary purpose of V2 after being abandoned is to act as a demo for a pygame
 
 Likely cause of the memory loss is not releasing the tracked frame after being used, as the Azure Kinect requires. Finding a function to do that in the library will be needed, or adding a command to the library. As I could not find where the library is stored, this was not done and so there is no confirmation that releasing the frame will fix the packet loss.
 
-### The V2 GUI ###
-The GUI is 100% button based. Buttons are pressed by holding a hand over the button (so the onscreen location of the tracked hand, indicated with a circle drawn around the hand joint, is on the button), and the button will fade from green to red over a short time. This is to prevent accidental button presses, and is possible to disable.
+### The V.2 GUI ###
+The V2 GUI is 100% button based. Buttons are pressed by holding a hand over the button (so the onscreen location of the tracked hand, indicated with a circle drawn around the hand joint, is on the button), and the button will fade from green to red over a short time. This is to prevent accidental button presses, and is possible to disable.
 
 Screens are displayed via a variable that saves the name of the current screen, and an if statement within the loop checks which "gamestate" (the screen name) is displayed and renders accordingly. Each loop deals with a single frame of tracked data.
 
 
 ## V.3 Project Structure, Files/Purpose ##
+V3 is run via a shell script. V3's shell script differs from V1 as the C server needs to be started first, so instead of running a single python3 command, V3 runs the server and client programs in the background. This makes crashes and closing the program unreliable, and so far the primary fix to runtime crashes is a computer restart.
+
+The vast majority of the C tracker is copied from Azure's simple_sample, with additions to track only the nearest user and compute hand angles, and a TCP server.
+
+The Python ODrive control is sensitive to the given angle, so the ramp_down zone is dampened to +- 20 degrees. Adjust as needed.
 
 ### Subfolders ###
-* /tracking stores the C tracker.
+* /tracking-module stores the C tracker.
 * /testing contains the programs used to test possible solutions to problems encountered, and is kept to either test functions without the rest of the maze, or for future testing.
 
 Note that testing may not be updated along with the main project, so the main project's implementations of testing code may differ greatly from what's in /testing.
@@ -67,26 +72,30 @@ The run script is more complex than V1's, as the C server needs to be started sl
 
 ## Previously Tested Features/Issues + Lessons learned ##
 
+Basic implementations of these features can be found via google or in /testing, sample code may be added to this doc in the future.
+
 ### Specific issues/solutions/implementations ###
 - C to Python data transfer
   - V1: printing via STDOUT, Python reads STDOUT
   - V3:
     - Named pipe server (FIFO): Attempted, difficult to use [2] and abandoned. (May be considered for other projects with this need)
     - TCP socket transfer: Currently implemented method of data transfer, works well for sending the angle over.
+      - Data is sent in byte format, so the Python program converts the bytes to int with ```int.from_bytes```. The option ```signed=True``` must be added, or negative ints will be parsed incorrectly.
 - Motor control
   - *V1-3 all use the original physics.py.* A simplifying rewrite may be needed, but usage as a black box works well enough that this is not a priority.
-  - physics.py can be a bit iffy, when rebooting remember to also cycle *all* the power strips to reset odrive, and to unplug everything from the Kinect for a full reset.
+  - physics.py can be a bit iffy, when rebooting remember to also cycle *all* the power strips to reset ODrive (wait until the power supply fan turns off before turning ODrive power back on), and to unplug everything from the Kinect for a full reset.
 - Azure Kinect
   - Most Azure problems have solutions in the SDK Issues page, in the docs, or sample code. Check those carefully first!
   - Don't forget to release the frame after use.
+  - The Kinect can only be accessed from one program at a time, so do as much as possible within the C tracker. More TCP servers can likely be opened if needed.
 
 
-### Generic lessons ###
+### Generic advice ###
 **Check Issues from Github code that you're copying before you copy, they might reveal some problems that would break your code.** For example, the code used for V2 had an Issue from Jan. 2019 about memory loss that wasn't addressed, and if we saw that before we could've saved three months worth of work.
 
-**Google your problems!** Chances are, someone on Stack Overflow has had your exact problem and the solution is on there. Learning to Google problems efficiently is the vast majority of problem solving.
+**Google your problems!** Chances are, someone on Stack Overflow has had your *exact* problem and the solution is on there. Learning to Google problems efficiently is the vast majority of problem solving. The vast majority of your time will be mashing various example programs and Stack Overflow answers and debugging the result until it works.
 
-## Footnotes and Important links ##
+## Footnotes and Reference links ##
 
 ### Documentation ###
 
@@ -100,7 +109,7 @@ The run script is more complex than V1's, as the C server needs to be started sl
 
 [Azure Kinect Sensor SDK Reference](https://microsoft.github.io/Azure-Kinect-Sensor-SDK/master/index.html)
 
-### Old Code ###
+### Old Project Repos ###
 
 [Kinetic Maze V1, pre-2019](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097)
 
