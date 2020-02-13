@@ -27,8 +27,6 @@ int64_t CloseCallback(void* /*context*/)
 }
 
 
-
-
 int main()
 {
 
