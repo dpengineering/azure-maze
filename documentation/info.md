@@ -22,7 +22,6 @@ Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1
 
 Turns out Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but most of the code should be self-explanatory.
 
-This project has two branches. Master is the main branch for working code, testing is for broken code.
 
 ## V.1 Project Structure, Files/Purpose ##
 V1 is run via a shell script, and has a similar format to V3, since you have to run ```make``` in the tracker directory.
