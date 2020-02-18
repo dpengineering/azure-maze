@@ -1,6 +1,8 @@
 # Basic Info about Azure Maze #
 **Last Updated: Feb. 12 2020, by Andrew Xie**
 
+[Last working commit]
+
 | Date | Project Status |
 |------|------|
 | 1/29/2020 | Azure Kinect software setup, code and repository prepared for hardware. |
