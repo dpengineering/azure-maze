@@ -41,7 +41,7 @@ int main()
                 {
                     // It should never hit timeout when K4A_WAIT_INFINITE is set.
                     std::cout << "Error! Add capture to tracker process queue timeout!" << std::endl;
-                    break;
+                    //break;
                 }
 
                 k4abt::frame body_frame = tracker.pop_result();
@@ -53,14 +53,12 @@ int main()
                     uint32_t c = 0;
                     for (uint32_t i = 0; i < num_bodies; i++)
                     {
-                        k4abt_body_t body;
-                        k4abt_body_t cbody;
                         k4abt_body_t body = body_frame.get_body(i);
                         k4abt_body_t cbody = body_frame.get_body(c);
 
                         if (body.skeleton.joints[2].position.v[2] < cbody.skeleton.joints[2].position.v[2])
                         {
-                          c = i
+                          c = i;
                         }
                     }
 
@@ -77,14 +75,14 @@ int main()
                 {
                     //  It should never hit timeout when K4A_WAIT_INFINITE is set.
                     std::cout << "Error! Pop body frame result time out!" << std::endl;
-                    break;
+                    //break;
                 }
             }
             else
             {
                 // It should never hit time out when K4A_WAIT_INFINITE is set.
                 std::cout << "Error! Get depth frame time out!" << std::endl;
-                break;
+                //break;
             }
         }
         std::cout << "Finished body tracking processing!" << std::endl;
