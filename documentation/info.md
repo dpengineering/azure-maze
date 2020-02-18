@@ -1,7 +1,7 @@
 # Basic Info about Azure Maze #
 **Last Updated: Feb. 12 2020, by Andrew Xie**
 
-[Last working commit]
+[Last working commit](https://github.com/andrewxie43/azure-maze/commit/c6b1bd0b8d6262e4c87178d566e0d47ea47b0cd5)
 
 | Date | Project Status |
 |------|------|
