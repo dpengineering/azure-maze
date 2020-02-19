@@ -167,9 +167,10 @@ int main()
                   final_body.id = k4abt_frame_get_body_id(body_frame, c);
 
                   float radangle = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
-                  int angle = radangle * 180 / 3.14;
+
                   //printf("Closest distance: %i\n", (int) final_body.skeleton.joints[2].position.v[2]);
                   //printf("[C] Angle: %i\n", angle);
+
 
                   write(connfd, &angle, 4);
 
@@ -213,6 +214,8 @@ int main()
     k4abt_tracker_destroy(tracker);
     k4a_device_stop_cameras(device);
     k4a_device_close(device);
+
+    close(sockfd)
 
     return 0;
 }

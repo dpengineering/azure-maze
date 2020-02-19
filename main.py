@@ -38,7 +38,7 @@ while True:
     print("Post-proc raw:", angle, "\n")
 
     if angle not in range(20,-20):
-            motor.set_velocity(motor.adjust_angle(math.radians(-angle)))
+            motor.set_velocity(motor.adjust_angle(-angle))
 
     else:
             motor.set_velocity(motor.ramp_down())

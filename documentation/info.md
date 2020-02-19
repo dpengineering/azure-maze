@@ -113,6 +113,10 @@ Basic implementations of these features can be found via Google, sample code may
 
 [Kinetic Maze V2 (Reborn), Nov 2019 - Jan 2020](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn)
 
+### Useful References ###
+
+[University of Crete - TCP Socket PPT](https://www.csd.uoc.gr/~hy556/material/tutorials/cs556-3rd-tutorial.pdf)
+
 ### Footnotes ###
 
 [1]: V1 sent all the raw joint info to Python via STDOUT. The C program printf'd the data, and Python read STDOUT and parsed the data. V3 does all the calculations before sending, and sends the angle in degrees. Note that V1 parsed the angle data to radians.
