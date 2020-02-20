@@ -11,8 +11,68 @@
 #include <k4a/k4a.hpp>
 #include <k4abt.hpp>
 
+//TCP Socket stuff
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/socket.h>
+#include <stdlib.h>
+#include <netinet/in.h>
+#include <string.h>
+#define PORT 7266
+
+
 int main()
 {
+    //Global vars for socket
+    int server_fd, client, valread;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
+    char buffer[1024] = {0};
+
+    std::cout << "Azure Maze started!" << std::endl;
+    std::cout << "Creating socket..." << std::endl;
+    // Creating socket file descriptor
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0)
+    {
+        perror("Socket creation failed!");
+        exit(EXIT_FAILURE);
+    }
+
+    // Forcefully attaching socket to the port 7266
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
+    {
+        perror("Setsockopt failed!");
+        exit(EXIT_FAILURE);
+    }
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons( PORT );
+
+    // Forcefully attaching socket to the port 7266
+    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0)
+    {
+        perror("Socket bind failed!");
+        exit(EXIT_FAILURE);
+    }
+    std::cout << "Socket bound to port " << PORT << "!" << std::endl;
+
+    if (listen(server_fd, 3) < 0)
+    {
+        perror("Socket listen failed!");
+        exit(EXIT_FAILURE);
+    }
+
+    std::cout << "Listening for client..."<< std::endl;
+
+    if ((client = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen))<0)
+    {
+        perror("Socket accept failed!");
+        exit(EXIT_FAILURE);
+    }
+    std::cout << "Client connected! Starting Kinect..."<< std::endl;
+
+
     try
     {
         k4a_device_configuration_t device_config = K4A_DEVICE_CONFIG_INIT_DISABLE_ALL;
@@ -66,7 +126,10 @@ int main()
 
 
                     k4abt_body_t final_body = body_frame.get_body(c);
-                    std::cout << atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]) << std::endl;
+                    int rad = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
+                    //int degree = rad * 180 / 3.14; //For debugging data python recieves
+
+                    send(client, (char*)rad, sizeof rad, 0); //Does not send properly, likely due to python reading the wrong size?
                   }
                 }
                 else
@@ -94,5 +157,6 @@ int main()
         return 1;
     }
 
+    close(server_fd);
     return 0;
 }
