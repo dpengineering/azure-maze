@@ -6,6 +6,8 @@
 #include <assert.h>
 #include <iostream>
 
+#include <math.h>
+
 #include <k4a/k4a.hpp>
 #include <k4abt.hpp>
 
@@ -46,19 +48,26 @@ int main()
                     uint32_t num_bodies = body_frame.get_num_bodies();
                     std::cout << num_bodies << " bodies are detected!" << std::endl;
 
-                    for (uint32_t i = 0; i < num_bodies; i++)
+                    if (num_bodies > 0) {
+                    uint32_t c = 0; //closest user
+                    for (uint32_t i = 0; i < num_bodies; i++) // Find the closest user and remember ID
                     {
                         k4abt_body_t body = body_frame.get_body(i);
-                        std::cout << "Body ID: " << body.id << std::endl;
-                        for (int i = 0; i < (int)K4ABT_JOINT_COUNT; i++)
+                        k4abt_body_t cbody = body_frame.get_body(c);
+
+                        k4a_float3_t position = body.skeleton.joints[2].position;
+                        k4a_float3_t cposition = cbody.skeleton.joints[2].position;
+
+                        if (position.v[2] < cposition.v[2])
                         {
-                            k4a_float3_t position = body.skeleton.joints[i].position;
-                            k4a_quaternion_t orientation = body.skeleton.joints[i].orientation;
-                            k4abt_joint_confidence_level_t confidence_level = body.skeleton.joints[i].confidence_level;
-                            printf("Joint[%d]: Position[mm] ( %f, %f, %f ); Orientation ( %f, %f, %f, %f); Confidence Level (%d)  \n",
-                                i, position.v[0], position.v[1], position.v[2], orientation.v[0], orientation.v[1], orientation.v[2], orientation.v[3], confidence_level);
+                          c = i;
                         }
                     }
+
+
+                    k4abt_body_t final_body = body_frame.get_body(c);
+                    std::cout << atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]) << std::endl;
+                  }
                 }
                 else
                 {
