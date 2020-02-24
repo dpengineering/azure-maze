@@ -126,10 +126,11 @@ int main()
 
 
                     k4abt_body_t final_body = body_frame.get_body(c);
-                    int rad = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
-                    //int degree = rad * 180 / 3.14; //For debugging data python recieves
+                    float rad = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
+                    int degree = rad * 180 / 3.14; //Python can only recive ints
 
-                    send(client, (char*)rad, sizeof rad, 0); //Does not send properly, likely due to python reading the wrong size?
+                    send(client, &degree, sizeof(degree), 0); //Does not send properly, likely due to python reading the wrong size?
+
                   }
                 }
                 else
