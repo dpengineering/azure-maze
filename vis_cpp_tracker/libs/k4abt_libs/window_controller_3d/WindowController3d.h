@@ -46,7 +46,7 @@ namespace Visualization
             bool showWindow = true,
             int width = -1,
             int height = -1,
-            bool fullscreen = false);
+            bool fullscreen = false); //CHANGE THIS TO TRUE IN FINAL BUILD?
 
         void Delete();
 
