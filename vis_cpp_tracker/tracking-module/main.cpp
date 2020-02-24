@@ -149,81 +149,8 @@ int main()
           k4a_wait_result_t popFrameResult = k4abt_tracker_pop_result(tracker, &bodyFrame, 0); // timeout_in_ms is set to 0
           if (popFrameResult == K4A_WAIT_RESULT_SUCCEEDED)
           {
-            //3d display follows
 
-              // Obtain original capture that generates the body tracking result
-              k4a_capture_t originalCapture = k4abt_frame_get_capture(bodyFrame);
-              k4a_image_t depthImage = k4a_capture_get_depth_image(originalCapture);
-
-              std::vector<Color> pointCloudColors(depthWidth * depthHeight, { 1.f, 1.f, 1.f, 1.f });
-
-              // Read body index map and assign colors
-              k4a_image_t bodyIndexMap = k4abt_frame_get_body_index_map(bodyFrame);
-              const uint8_t* bodyIndexMapBuffer = k4a_image_get_buffer(bodyIndexMap);
-              for (int i = 0; i < depthWidth * depthHeight; i++)
-              {
-                  uint8_t bodyIndex = bodyIndexMapBuffer[i];
-                  if (bodyIndex != K4ABT_BODY_INDEX_MAP_BACKGROUND)
-                  {
-                      uint32_t bodyId = k4abt_frame_get_body_id(bodyFrame, bodyIndex);
-                      pointCloudColors[i] = g_bodyColors[bodyId % g_bodyColors.size()];
-                  }
-              }
-              k4a_image_release(bodyIndexMap);
-
-              // Visualize point cloud
-              window3d.UpdatePointClouds(depthImage, pointCloudColors);
-
-              // Visualize the skeleton data
-              window3d.CleanJointsAndBones();
               uint32_t numBodies = k4abt_frame_get_num_bodies(bodyFrame);
-              for (uint32_t i = 0; i < numBodies; i++)
-              {
-                  k4abt_body_t body;
-                  k4abt_frame_get_body_skeleton(bodyFrame, i, &body.skeleton);
-                  body.id = k4abt_frame_get_body_id(bodyFrame, i);
-
-                  // Assign the correct color based on the body id
-                  Color color = g_bodyColors[body.id % g_bodyColors.size()];
-                  color.a = 0.4f;
-                  Color lowConfidenceColor = color;
-                  lowConfidenceColor.a = 0.1f;
-
-                  // Visualize joints
-                  for (int joint = 0; joint < static_cast<int>(K4ABT_JOINT_COUNT); joint++)
-                  {
-                      if (body.skeleton.joints[joint].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW)
-                      {
-                          const k4a_float3_t& jointPosition = body.skeleton.joints[joint].position;
-                          const k4a_quaternion_t& jointOrientation = body.skeleton.joints[joint].orientation;
-
-                          window3d.AddJoint(
-                              jointPosition,
-                              jointOrientation,
-                              body.skeleton.joints[joint].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM ? color : lowConfidenceColor);
-                      }
-                  }
-
-                  // Visualize bones
-                  for (size_t boneIdx = 0; boneIdx < g_boneList.size(); boneIdx++)
-                  {
-                      k4abt_joint_id_t joint1 = g_boneList[boneIdx].first;
-                      k4abt_joint_id_t joint2 = g_boneList[boneIdx].second;
-
-                      if (body.skeleton.joints[joint1].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW &&
-                          body.skeleton.joints[joint2].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW)
-                      {
-                          bool confidentBone = body.skeleton.joints[joint1].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM &&
-                                               body.skeleton.joints[joint2].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM;
-                          const k4a_float3_t& joint1Position = body.skeleton.joints[joint1].position;
-                          const k4a_float3_t& joint2Position = body.skeleton.joints[joint2].position;
-
-                          window3d.AddBone(joint1Position, joint2Position, confidentBone ? color : lowConfidenceColor);
-                      }
-                  }
-              }
-
-
               //tracking data
               std::cout << numBodies << " bodies are detected!" << std::endl;
 
@@ -252,7 +179,105 @@ int main()
               float rad = atan2 (final_body.skeleton.joints[8].position.v[1] - final_body.skeleton.joints[15].position.v[1], final_body.skeleton.joints[8].position.v[0] - final_body.skeleton.joints[15].position.v[0]);
               int degree = rad * 180 / 3.14; //Python can only recive ints
 
-              send(client, &degree, sizeof(degree), 0); //Does not send properly, likely due to python reading the wrong size?
+              send(client, &degree, sizeof(degree), 0);
+
+              //3d display follows
+
+              // Obtain original capture that generates the body tracking result
+              k4a_capture_t originalCapture = k4abt_frame_get_capture(bodyFrame);
+              k4a_image_t depthImage = k4a_capture_get_depth_image(originalCapture);
+
+              std::vector<Color> pointCloudColors(depthWidth * depthHeight, { 1.f, 1.f, 1.f, 1.f });
+
+              // Read body index map and assign colors
+              k4a_image_t bodyIndexMap = k4abt_frame_get_body_index_map(bodyFrame);
+              const uint8_t* bodyIndexMapBuffer = k4a_image_get_buffer(bodyIndexMap);
+              for (int i = 0; i < depthWidth * depthHeight; i++)
+              {
+                  uint8_t bodyIndex = bodyIndexMapBuffer[i];
+                  if (bodyIndex != K4ABT_BODY_INDEX_MAP_BACKGROUND)
+                  {
+                      uint32_t bodyId = k4abt_frame_get_body_id(bodyFrame, bodyIndex);
+                      pointCloudColors[i] = g_bodyColors[bodyId % g_bodyColors.size()];
+                  }
+              }
+              k4a_image_release(bodyIndexMap);
+
+              // Visualize point cloud
+              window3d.UpdatePointClouds(depthImage, pointCloudColors);
+
+              // Visualize the skeleton data
+              window3d.CleanJointsAndBones();
+
+              final_body.id = k4abt_frame_get_body_id(bodyFrame, c);
+
+              // Assign the correct color based on the body id
+              Color color = g_bodyColors[final_body.id % g_bodyColors.size()];
+              color.a = 0.4f;
+              Color lowConfidenceColor = color;
+              lowConfidenceColor.a = 0.1f;
+
+              // Visualize joints
+              for (int joint = 0; joint < static_cast<int>(K4ABT_JOINT_COUNT); joint++)
+              {
+                  if (joint == 9 || joint == 10 || joint == 16 || joint == 17 || joint == 28 || joint == 29 || joint == 30 || joint == 31){
+                    continue;
+                    //Don't display some joints to reduce clutter
+                  }
+                  if (final_body.skeleton.joints[joint].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW)
+                  {
+                      const k4a_float3_t& jointPosition = final_body.skeleton.joints[joint].position;
+                      const k4a_quaternion_t& jointOrientation = final_body.skeleton.joints[joint].orientation;
+
+                      window3d.AddJoint(
+                          jointPosition,
+                          jointOrientation,
+                          final_body.skeleton.joints[joint].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM ? color : lowConfidenceColor);
+                  }
+              }
+
+              // Visualize bones
+              for (size_t boneIdx = 0; boneIdx < g_boneList.size(); boneIdx++)
+              {
+
+                  k4abt_joint_id_t joint1 = g_boneList[boneIdx].first;
+                  k4abt_joint_id_t joint2 = g_boneList[boneIdx].second;
+
+
+                  if (joint1 == K4ABT_JOINT_HANDTIP_LEFT ||
+                      joint1 == K4ABT_JOINT_THUMB_LEFT ||
+                      joint1 == K4ABT_JOINT_HANDTIP_RIGHT ||
+                      joint1 == K4ABT_JOINT_THUMB_RIGHT ||
+                      joint1 == K4ABT_JOINT_NOSE ||
+                      joint1 == K4ABT_JOINT_EYE_LEFT ||
+                      joint1 == K4ABT_JOINT_EAR_LEFT ||
+                      joint1 == K4ABT_JOINT_EYE_RIGHT ||
+                      joint1 == K4ABT_JOINT_EAR_RIGHT ||
+                      joint2 == K4ABT_JOINT_HANDTIP_LEFT ||
+                      joint2 == K4ABT_JOINT_THUMB_LEFT ||
+                      joint2 == K4ABT_JOINT_HANDTIP_RIGHT ||
+                      joint2 == K4ABT_JOINT_THUMB_RIGHT ||
+                      joint2 == K4ABT_JOINT_EYE_LEFT ||
+                      joint2 == K4ABT_JOINT_EAR_LEFT ||
+                      joint2 == K4ABT_JOINT_EYE_RIGHT ||
+                      joint2 == K4ABT_JOINT_EAR_RIGHT){
+                    continue;
+                  }
+
+                  if (final_body.skeleton.joints[joint1].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW &&
+                      final_body.skeleton.joints[joint2].confidence_level >= K4ABT_JOINT_CONFIDENCE_LOW)
+                  {
+                      bool confidentBone = final_body.skeleton.joints[joint1].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM &&
+                                           final_body.skeleton.joints[joint2].confidence_level >= K4ABT_JOINT_CONFIDENCE_MEDIUM;
+                      const k4a_float3_t& joint1Position = final_body.skeleton.joints[joint1].position;
+                      const k4a_float3_t& joint2Position = final_body.skeleton.joints[joint2].position;
+
+                      window3d.AddBone(joint1Position, joint2Position, confidentBone ? color : lowConfidenceColor);
+                  }
+              }
+
+
+
 
 
               k4a_capture_release(originalCapture);
