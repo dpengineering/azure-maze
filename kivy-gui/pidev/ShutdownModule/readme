@@ -1,0 +1,17 @@
+To set up the power_shutdown module:
+
+Make sure the repo is cloned in Documents
+
+First, copy the power_shutdown folder into the proper modules folder with the command:
+sudo cp -r /home/pi/packages/RaspberryPiCommon/pidev/ShutdownModule/power_shutdown /lib/modules/$(uname -r)/kernel/drivers
+
+Then, find the module's dependency, making it visible to modprobe by running the commands:
+cd /lib/modules/$(uname -r)/kernel/drivers/power_shutdown
+sudo depmod
+
+Then, add power_shutdown to the list of modules to be installed on boot by running the following commands:
+cd
+sudo su
+echo power_shutdown >> /etc/modules-load.d/modules.conf
+
+Finally, reboot the Raspberyy Pi

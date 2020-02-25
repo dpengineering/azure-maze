@@ -1,0 +1,148 @@
+<PassCodeScreen>:
+    name: 'admin'
+    FloatLayout:
+        size_hint: None, None
+
+        DPEAButton:
+            text: 'Back to Game'
+            id: back
+            center_x: root.center_x
+            center_y: root.center_y + 260
+            color: 0.019, 0.337, 1, 1
+            size: 280, 80
+            on_press: root.transition_back()
+
+        Label:
+            text: ' '
+            id: pw
+            font_size: 60
+            color: 1, 1, 1, 1
+            bold: True
+            outline_width: self.font_size * 0.1
+            outline_color: 0, 0, 0
+            center_x: root.center_x
+            center_y: root.center_y + 160
+
+        DPEAButton:
+            text: '1'
+            id: one
+            center_x: root.center_x - 100
+            center_y: root.center_y + 60
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(1)
+
+        DPEAButton:
+            text: '2'
+            id: two
+            center_x: root.center_x
+            center_y: root.center_y + 60
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(2)
+
+        DPEAButton:
+            text: '3'
+            id: three
+            center_x: root.center_x + 100
+            center_y: root.center_y + 60
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(3)
+
+        DPEAButton:
+            text: '4'
+            id: four
+            center_x: root.center_x - 100
+            center_y: root.center_y - 40
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(4)
+
+        DPEAButton:
+            text: '5'
+            id: five
+            center_x: root.center_x
+            center_y: root.center_y - 40
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(5)
+
+        DPEAButton:
+            text: '6'
+            id: six
+            center_x: root.center_x + 100
+            center_y: root.center_y - 40
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(6)
+
+
+        DPEAButton:
+            text: '7'
+            id: seven
+            center_x: root.center_x - 100
+            center_y: root.center_y - 140
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(7)
+
+        DPEAButton:
+            text: '8'
+            id: eight
+            center_x: root.center_x
+            center_y: root.center_y - 140
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(8)
+
+        DPEAButton:
+            text: '9'
+            id: nine
+            center_x: root.center_x + 100
+            center_y: root.center_y - 140
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(9)
+
+        DPEAButton:
+            text: '0'
+            id: zero
+            center_x: root.center_x
+            center_y: root.center_y - 240
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.add_num(0)
+
+        DPEAButton:
+            text: 'Del'
+            id: backspace
+            center_x: root.center_x - 100
+            center_y: root.center_y - 240
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.remove_num()
+
+        DPEAButton:
+            text: 'Etr'
+            id: enter
+            center_x: root.center_x + 100
+            center_y: root.center_y - 240
+            color: 0.019, 0.337, 1, 1
+            size: 80, 80
+            on_press: root.check_pass()
+
+<MainScreen>
+    name: 'main'
+    FloatLayout:
+        size_hint: None, None
+
+    Button:
+        id: admin
+        size_hint: None,None
+        font_size: 20
+        size: 10, 10
+        background_color: 0, 0, 0, 0
+        background_normal: ''
+        center: root.width - 5, 5
+        on_press: root.admin_action()

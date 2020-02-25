@@ -1,0 +1,38 @@
+<PauseScreen>
+    name: 'pauseScene'
+    FloatLayout:
+        size_hint: None, None
+        canvas:
+            Color:
+                rgba: 0, 0, 0, .4
+            Rectangle:
+                size: root.size
+                pos: 0, 0
+            Color:
+                rgba: 0, 0, 0, .8
+            RoundedRectangle:
+                radius: 7, 7, 7, 7
+                size: 156, 14
+                pos: root.center_x - 78, root.center_y - 72
+
+        Image:
+            id: progress_bar
+            source: root.white_image_path
+            keep_ratio: False
+            allow_stretch: True
+            size_hint: None, None
+            size: 10, 10
+            x: root.center_x - 75
+            y: root.center_y - 70
+
+        Label:
+            id: pause_text
+            text: 'Paused'
+            font_size: 40
+            color: 1, 1, 1, 1
+            bold: True
+            outline_width: self.font_size * 0.1
+            outline_color: 0, 0, 0, 1
+            center: root.center
+
+

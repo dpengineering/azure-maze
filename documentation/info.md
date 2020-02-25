@@ -79,7 +79,7 @@ Basic implementations of these features can be found via Google, sample code may
   - V3:
     - Named pipe server (FIFO): Attempted, difficult to use [2] and abandoned. (May be considered for other projects with this need)
     - TCP socket transfer: Currently implemented method of data transfer, works well for sending the angle over.
-      - Data is sent in byte format, so the Python program converts the bytes to int with ```int.from_bytes```. The option ```signed=True``` must be added, or negative ints will be parsed incorrectly.
+      - Data is sent in byte format, so the Python program converts the bytes to int with ```int.from_bytes```. The option ```signed=True``` must be added, or negative ints will be parsed incorrectly. Data must be an int, so cannot be raw radians.
 - Motor control
   - *V1-3 all use the original physics.py.* A simplifying rewrite may be needed, but usage as a black box works well enough that this is not a priority.
   - physics.py can be a bit iffy, when rebooting remember to also cycle *all* the power strips to reset ODrive (wait until the power supply fan turns off before turning ODrive power back on), and to unplug everything from the Kinect for a full reset.
@@ -117,6 +117,10 @@ Basic implementations of these features can be found via Google, sample code may
 ### Useful References ###
 
 [University of Crete - TCP Socket PPT](https://www.csd.uoc.gr/~hy556/material/tutorials/cs556-3rd-tutorial.pdf)
+
+[Forcing full screen](https://superuser.com/questions/1144959/how-do-i-stop-fullscreen-games-from-minimizing-when-i-click-on-another-window-on)
+
+pip3 install kivy
 
 ### Footnotes ###
 

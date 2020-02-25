@@ -1,0 +1,34 @@
+#: import ex5 ex5
+
+
+<MainScreen>:
+    name: 'main'
+    FloatLayout:
+        size_hint: None, None
+
+
+
+    ImageButton:
+        id: logo_image_button
+        source: "../../pidev/kivy/images/DPEALogoTransparent.png"
+
+        size: 100,100
+        x: root.width * 0.75
+        y: root.height * 0.2
+        on_press: root.manager.current = 'two'
+
+
+<SecondScreen>:
+    name: 'two'
+    id: 'two'
+    FloatLayout:
+        size_hint: None, None
+
+    ImageButton:
+        id: logo_image_button
+        source: "../../pidev/kivy/images/DPEALogoTransparent.png"
+
+        size: 100,100
+        x: root.width * 0.75
+        y: root.height * 0.2
+        on_press: root.manager.current = 'main'
