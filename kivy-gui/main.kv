@@ -6,29 +6,12 @@
     FloatLayout:
         size_hint: None, None
 
-
-
-    ImageButton:
-        id: logo_image_button
-        source: "../../pidev/kivy/images/DPEALogoTransparent.png"
-
-        size: 100,100
-        x: root.width * 0.75
-        y: root.height * 0.2
-        on_press: root.manager.current = 'two'
-
-
-<SecondScreen>:
-    name: 'two'
-    id: 'two'
-    FloatLayout:
-        size_hint: None, None
-
-    ImageButton:
-        id: logo_image_button
-        source: "../../pidev/kivy/images/DPEALogoTransparent.png"
-
-        size: 100,100
-        x: root.width * 0.75
-        y: root.height * 0.2
-        on_press: root.manager.current = 'main'
+    Label:
+        id: title_text
+        text: 'Azure Maze'
+        font_size: 40
+        color: 1, 1, 1, 1
+        bold: True
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0, 1
+        center: root.center
