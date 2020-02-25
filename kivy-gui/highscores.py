@@ -1,3 +1,5 @@
+#Written by Andrew Xie, December 2019, for the DPEA
+
 import math, time, random, numpy, os
 
 import pygame
@@ -120,7 +122,7 @@ class Scoreboard:
             check = True
         return check
 
-        
+
     def getTotal(self):
         total = 0
         with open(self.scorepath,"r") as f:
