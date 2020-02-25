@@ -6,7 +6,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 SCREEN_MANAGER = ScreenManager()
-MAIN_SCREEN_NAME = 'main'
+IDLE_SCREEN_NAME = 'idle'
 
 
 class AzureMaze(App):
@@ -25,7 +25,7 @@ class AzureMaze(App):
 Window.clearcolor = (1, 1, 1, 1)  # White
 
 
-class MainScreen(Screen):
+class IdleScreen(Screen):
     pass
 
 
@@ -34,22 +34,8 @@ Widget additions
 """
 
 Builder.load_file('main.kv')
-SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
-"""
-MixPanel
-"""
+SCREEN_MANAGER.add_widget(IdleScreen(name=IDLE_SCREEN_NAME))
 
-
-def send_event(event_name):
-    """
-    Send an event to MixPanel without properties
-    :param event_name: Name of the event
-    :return: None
-    """
-    global MIXPANEL
-
-    MIXPANEL.set_event_name(event_name)
-    MIXPANEL.send_event()
 
 
 if __name__ == "__main__":
