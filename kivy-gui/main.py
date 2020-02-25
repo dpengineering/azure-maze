@@ -5,9 +5,6 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-
-from ex5 import *
-
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 

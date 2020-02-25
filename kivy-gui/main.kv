@@ -1,17 +1,29 @@
-#: import ex5 ex5
-
-
 <MainScreen>:
     name: 'main'
     FloatLayout:
         size_hint: None, None
+        canvas:
+            Color:
+                rgba: 0, 0, 0, .4
+            Rectangle:
+                size: root.size
+                pos: 0, 0
+            Color:
+                rgba: 0, 0, 0, .8
 
-    Label:
-        id: title_text
-        text: 'Azure Maze'
-        font_size: 40
-        color: 1, 1, 1, 1
-        bold: True
-        outline_width: self.font_size * 0.1
-        outline_color: 0, 0, 0, 1
-        center: root.center
+        Label:
+            id: title_text
+            text: 'Azure Maze'
+            font_size: 40
+
+            color: 1, 1, 1, 0
+            bold: True
+            outline_width: self.font_size * 0.1
+            outline_color: 0, 0, 0, 1
+
+            center_x: root.center_x
+            center_y: root.center_y * 1.9
+
+        BoxLayout:
+            orientation: 'vertical'
+            center: root.center
