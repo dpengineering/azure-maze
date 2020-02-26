@@ -1,7 +1,7 @@
 # Basic Info about Azure Maze #
-**Last Updated: Feb. 12 2020, by Andrew Xie**
+**Last Updated: Feb. 26 2020, by Andrew Xie**
 
-[Last working commit](https://github.com/andrewxie43/azure-maze/commit/c6b1bd0b8d6262e4c87178d566e0d47ea47b0cd5)
+[Releases (MVP Builds)](https://github.com/andrewxie43/azure-maze/releases)
 
 | Date | Project Status |
 |------|------|
@@ -9,6 +9,9 @@
 | 1/31/2020 | First Azure Kinect arrived at DPEA. |
 | 2/12/2020 | Reached working status with motors, minimum viable product. |
 | 2/24/2020 | Conversion from C to C++ completed |
+| 2/26/2020 | Work started on Kivy in preparation for dual monitor |
+
+**Next Objective:** Finish basic Kivy GUI
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
@@ -43,14 +46,26 @@ Screens are displayed via a variable that saves the name of the current screen, 
 
 
 ## V.3 Project Structure, Files/Purpose ##
-V3 is run via a shell script. V3's shell script differs from V1 as the C server needs to be started first, so instead of running a single python3 command, V3 runs the server and client programs in the background. This makes crashes and closing the program unreliable, and so far the primary fix to runtime crashes is a computer restart.
 
-The vast majority of the C++ tracker is copied from Azure's simple_cpp_sample, with additions to track only the nearest user and compute hand angles, and a TCP server.
+V3 tracker was initially written in C then converted to C++, not all documentation may reflect this change.
+
+The vast majority of the C++ tracker is copied from Azure's simple_cpp_sample, with additions to track only the nearest user and compute hand angles, a TCP server, and a display (simple_3d_viewer) modified to display the tracked user only.
 
 The Python ODrive control is sensitive to the given angle, so the ramp_down zone is dampened to +- 20 degrees. Adjust as needed.
 
 ### Subfolders ###
-* /tracking-module stores the C++ tracker.
+* /kivy-gui stores the testing files for the Kivy gui.
+* /testing stores previous tests.
+
+In testing:
+3d_viewer is an isolation of simple_3d_viewer and should not be touched.
+graphics-test is an abandoned test of a SDL gui.
+tcp-cpp is a test of C TCP server code in C++.
+track-cpp is a rewrite of tracking-module in C++.
+tracker-v2 is an attempt to add 3d-viewer in C, however it was not compatible and the tracker was moved to C++.
+tracking-module is the original C tracker.
+
+To compile, all C++ folders use CMake while C folders use Make. In C++ folders, make a folder called build, then run cmake .. and make from that folder. In C folders, run make in the directory with the Makefile.
 
 The rest of the folder is the Python that runs the ODrive based off data from the C++ tracker, or misc files such as the license, and readme.
 
@@ -66,14 +81,8 @@ The C++ tracker is built off MS Azure Kinect sample code, from a program called 
 #### physics.py ####
 The original motor control code from V1, which could not be replaced due to heavy customization and JSON configs. The JSON configs will eventually be replaced with variables directly in the code.
 
-#### run.sh ####
-The run script is more complex than V1's, as the C server needs to be started slightly before the Python client. If you need output messages, unpipe the two processes from null. Be aware that both server and client will print at the same time, so remember to comment out the messages you don't need (print/printf) (> /dev/null 2>&1). **If the C program fails to create/bind a socket, exit asap and restart!**
 
-## Previously Tested Features/Issues + Lessons learned ##
-
-Basic implementations of these features can be found via Google, sample code may be added to this doc in the future.
-
-### Specific issues/solutions/implementations ###
+## Specific issues/solutions/implementations ##
 - C to Python data transfer
   - V1: printing via STDOUT, Python reads STDOUT
   - V3:
@@ -92,7 +101,7 @@ Basic implementations of these features can be found via Google, sample code may
 ### Generic advice ###
 **Check Issues from Github code that you're copying before you copy, they might reveal some problems that would break your code.** For example, the code used for V2 had an Issue from Jan. 2019 about memory loss that wasn't addressed, and if we saw that before we could've saved three months worth of work.
 
-**Google your problems!** Chances are, someone on Stack Overflow has had your *exact* problem and the solution is on there. Learning to Google problems efficiently is the vast majority of problem solving. The vast majority of your time will be mashing various example programs and Stack Overflow answers and debugging the result until it works.
+**Google your problems!** Chances are, someone on Stack Overflow, Github, or a forum had a similar problem to yours, and the solution is easily available with sample code.
 
 ## Footnotes and Reference links ##
 
