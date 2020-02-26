@@ -36,7 +36,7 @@ Joints: x,y,z, measured in mm from the lens of the camera.
 
 ## How to Run ##
 
-OUTDATED
+**OUTDATED - INSTRUCTIONS INTENDED FOR RELEASE v1.0**
 
 Compile the tracker by running:
 ```
@@ -50,6 +50,28 @@ From the project directory:
 ```
 
 If the program crashes, current method of resetting is to restart the computer to free port 7266. Also, to reset the ODrive, wait for the fan on the power supply to stop before turning the power strip back on, to ensure power to the ODrive actually cut.
+
+
+**To run the current prototype**
+
+**If motors are needed, uncomment the motor lines from main.py**
+
+With two monitors:
+Make a terminal window on both screens.
+
+In vis_cpp_tracker, run the trackhands script in /build/bin. If this is not compiled, go to /build and run:
+```
+rm -r *
+cmake ..
+make
+```
+After compiling, follow the instructions from the beginning once more.
+
+Run the script.
+
+On the other terminal window (on the second monitor), run ```python3 main.py```.
+
+With one monitor: change vis_cpp_tracker/libs/k4abt_libs/window_controller_3d/WindowController3d.h line 49 to bool fullscreen = false, then follow the instructions for two monitors.
 
 
 
