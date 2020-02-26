@@ -36,7 +36,7 @@ Joints: x,y,z, measured in mm from the lens of the camera.
 
 ## How to Run ##
 
-**OUTDATED - INSTRUCTIONS INTENDED FOR RELEASE v1.0**
+**OUTDATED - INSTRUCTIONS INTENDED FOR RELEASE v1.0, script deleted from up to date repo**
 
 Compile the tracker by running:
 ```
