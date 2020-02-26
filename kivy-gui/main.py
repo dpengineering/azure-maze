@@ -5,8 +5,12 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+from kivy.config import Config
+
 SCREEN_MANAGER = ScreenManager()
+LEADERBOARD_SCREEN_NAME = 'leaderboard'
 IDLE_SCREEN_NAME = 'idle'
+GAME_SCREEN_NAME = 'game'
 
 
 class AzureMaze(App):
@@ -23,9 +27,11 @@ class AzureMaze(App):
 
 
 Window.clearcolor = (1, 1, 1, 1)  # White
-
-
+class LeaderScreen(Screen):
+    pass
 class IdleScreen(Screen):
+    pass
+class GameScreen(Screen):
     pass
 
 
@@ -34,11 +40,14 @@ Widget additions
 """
 
 Builder.load_file('main.kv')
+SCREEN_MANAGER.add_widget(LeaderScreen(name=LEADERBOARD_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(IdleScreen(name=IDLE_SCREEN_NAME))
 
 
 
 if __name__ == "__main__":
     # send_event("Project Initialized")
-    # Window.fullscreen = 'auto'
+    Window.fullscreen = 'auto'
+    Config.set('graphics', 'window_state', 'maximized')
+    Config.write()
     AzureMaze().run()
