@@ -15,27 +15,25 @@
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
-Hopefully this file makes the transition into this project easier. Instructions on running the project will be stored in the readme.
-
 *Please update this file (and the timeline table) when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part to keep this the most thoroughly documented DPEA project!
+
+Instructions on running the project will be stored in the readme.
+
 
 ## Background ##
 Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 (V1) was written by Paul, which was replaced with Version 2 (V2) written by Braedan.
 
 [V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation found by Braedan. That implementation was found to have memory loss/packet loss issues over time, crashing after 3 minutes.
 
-Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code, which is worth understanding. A chunk by chunk annotation with comments may be available eventually, but most of the code should be self-explanatory.
-
+Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code.
 
 ## V.1 Project Structure, Files/Purpose ##
 V1 is run via a shell script, and has a similar format to V3, since you have to run ```make``` in the tracker directory.
 
-This program is a useful starting point for learning about the project's structure (via following import statements around different files), and a good study of using logger. However, now that Azure Maze has reached the same point in a more simple way, and likely will be the hardware/version used for future builds, it's more highly recommended to study how Azure Maze works.
+This program is a useful starting point for learning about the project's structure (via following import statements around different files). However, Azure Maze has advanced enough to fully replace V1.
 
 ## V.2 Project Structure, Files/Purpose ##
 V2 is run directly through ```python3 main.py```. The current implementation has a interactive GUI and score input screen, however suffers severe memory/packet loss and will crash after 4 minutes max. Instead of using a C tracker, V2 uses a NiTE/OpenNI2 Python tracker stored in the submodule Kinect_Skeleton_Tracker, which needs to be initialized before running the program!
-
-The primary purpose of V2 after being abandoned is to act as a demo for a pygame GUI that can be interacted with by a body tracker.
 
 Likely cause of the memory loss is not releasing the tracked frame after being used, as the Azure Kinect requires. Finding a function to do that in the library will be needed, or adding a command to the library. As I could not find where the library is stored, this was not done and so there is no confirmation that releasing the frame will fix the packet loss.
 
@@ -58,12 +56,12 @@ The Python ODrive control is sensitive to the given angle, so the ramp_down zone
 * /testing stores previous tests.
 
 In testing:
-3d_viewer is an isolation of simple_3d_viewer and should not be touched.
-graphics-test is an abandoned test of a SDL gui.
-tcp-cpp is a test of C TCP server code in C++.
-track-cpp is a rewrite of tracking-module in C++.
-tracker-v2 is an attempt to add 3d-viewer in C, however it was not compatible and the tracker was moved to C++.
-tracking-module is the original C tracker.
+- 3d_viewer is an isolation of simple_3d_viewer and should not be touched.
+- graphics-test is an abandoned test of a SDL gui.
+- tcp-cpp is a test of C TCP server code in C++.
+- track-cpp is a rewrite of tracking-module in C++.
+- tracker-v2 is an attempt to add 3d-viewer in C, however it was not compatible and the tracker was moved to C++.
+- tracking-module is the original C tracker.
 
 To compile, all C++ folders use CMake while C folders use Make. In C++ folders, make a folder called build, then run cmake .. and make from that folder. In C folders, run make in the directory with the Makefile.
 
@@ -97,12 +95,6 @@ The original motor control code from V1, which could not be replaced due to heav
   - Don't forget to release the frame after use.
   - The Kinect can only be accessed from one program at a time, so do as much as possible within the C++ tracker. More TCP servers can likely be opened if needed.
 
-
-### Generic advice ###
-**Check Issues from Github code that you're copying before you copy, they might reveal some problems that would break your code.** For example, the code used for V2 had an Issue from Jan. 2019 about memory loss that wasn't addressed, and if we saw that before we could've saved three months worth of work.
-
-**Google your problems!** Chances are, someone on Stack Overflow, Github, or a forum had a similar problem to yours, and the solution is easily available with sample code.
-
 ## Footnotes and Reference links ##
 
 ### Documentation ###
@@ -129,7 +121,6 @@ The original motor control code from V1, which could not be replaced due to heav
 
 [Forcing full screen](https://superuser.com/questions/1144959/how-do-i-stop-fullscreen-games-from-minimizing-when-i-click-on-another-window-on)
 
-pip3 install kivy
 
 ### Footnotes ###
 
