@@ -41,13 +41,13 @@ Widget additions
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(LeaderScreen(name=LEADERBOARD_SCREEN_NAME))
-SCREEN_MANAGER.add_widget(IdleScreen(name=IDLE_SCREEN_NAME))
 
 
 
 if __name__ == "__main__":
     # send_event("Project Initialized")
-    Window.fullscreen = 'auto'
-    Config.set('graphics', 'window_state', 'maximized')
+    Config.set('graphics', 'window_state', 'visible')
     Config.write()
+    Window.size = (1280, 1024)
+    #Window.borderless = 1
     AzureMaze().run()
