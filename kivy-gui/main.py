@@ -46,8 +46,6 @@ SCREEN_MANAGER.add_widget(LeaderScreen(name=LEADERBOARD_SCREEN_NAME))
 
 if __name__ == "__main__":
     # send_event("Project Initialized")
-    Config.set('graphics', 'window_state', 'visible')
-    Config.write()
     Window.size = (1280, 1024)
-    #Window.borderless = 1
+    Window.borderless = 1
     AzureMaze().run()
