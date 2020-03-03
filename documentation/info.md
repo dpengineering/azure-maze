@@ -62,6 +62,9 @@ In testing:
 - tracker-v2 is an attempt to add 3d-viewer in C, however it was not compatible and the tracker was moved to C++.
 - tracking-module is the original C tracker.
 
+Some of these testing files may be useful as standalone utilities.
+
+
 To compile, all C++ folders use CMake while C folders use Make. In C++ folders, make a folder called build, then run cmake .. and make from that folder. In C folders, run make in the directory with the Makefile.
 
 ### Files of interest ###
