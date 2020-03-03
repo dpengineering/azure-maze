@@ -11,15 +11,98 @@
                 size: root.size
 
         Label:
-            text: "Kivy test"
+            id: title_text
+            text: 'Azure Maze'
             font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 40
             center_x: root.center_x
-            center_y: root.center_y
+            center_y: root.center_y * 1.8
+
+        AnchorLayout:
+            anchor_x: 'left'
+            anchor_y: 'bottom'
+
+            GridLayout:
+                cols: 3
+                rows: 4
+                center_x: root.center_x * 0.75 #center on mid column
+                center_y: root.center_y * 1.3
+                row_force_default: True
+                row_default_height: 20
+
+                col_force_default: True
+                col_default_width: 200
+
+                Label:
+                    text: 'Place'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: 'Name'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: 'Score'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+
+
+                #Player 1
+                Label:
+                    text: '1st'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: 'Alfa'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: '1:00'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                #Player 2
+                Label:
+                    text: '2nd'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: 'Bravo'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: '7:00'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                #Player 3
+                Label:
+                    text: '3rd'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: 'Charlie'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
+                Label:
+                    text: '10:00'
+                    font_name: '../assets/PressStart2P-Regular.ttf'
+                    font_size: 20
+                    color: 1, 1, 1, 0
 
 
     FloatLayout:
         size_hint: None, None
-        pos: 0, -540
+        pos: 0, -600
         canvas.before:
             Color:
                 rgba: 1, 0, 0, 0.75
