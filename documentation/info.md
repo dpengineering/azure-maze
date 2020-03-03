@@ -15,25 +15,24 @@
 
 This project will be documented in order to avoid the mess of almost all other DPEA projects, where new teams have difficulty understanding code due to complete lack of documentation. This file may be worded/organized strangely and confusingly, if so Harlow should be able to clarify some things or provide contact info to previous teams.
 
-*Please update this file (and the timeline table) when major changes are made, new functionality added, or problems that may be encountered by others are solved!* Do your part to keep this the most thoroughly documented DPEA project!
 
 Instructions on running the project will be stored in the readme.
 
 
 ## Background ##
-Azure maze is the third version of Kinetic Maze software for the DPEA. Version 1 (V1) was written by Paul, which was replaced with Version 2 (V2) written by Braedan.
+Azure maze is the third version of Kinetic Maze software for the DPEA.
 
-[V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation found by Braedan. That implementation was found to have memory loss/packet loss issues over time, crashing after 3 minutes.
+[V1](https://github.com/dpengineering/kinetic-maze/tree/6517ff8c6544c4c8287182b5a3d50727d381c097) used C for tracking and Python for parsing, and [V2](https://github.com/bkenndpngineering/Kinetic-Maze-Reborn) was written off a pure Python tracking implementation. That implementation was found to have memory loss/packet loss issues over time, crashing after 3 minutes.
 
-Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bought for potential use, which resulted in this project. The vast majority of V3's code consists of modified Azure code.
+Microsoft Azure made a new Kinect last year (Feb. 2019), so one was bough. The vast majority of V3's code consists of modified Azure code.
 
 ## V.1 Project Structure, Files/Purpose ##
 V1 is run via a shell script, and has a similar format to V3, since you have to run ```make``` in the tracker directory.
 
-This program is a useful starting point for learning about the project's structure (via following import statements around different files). However, Azure Maze has advanced enough to fully replace V1.
+This program is a useful starting point for learning about the project's structure.
 
 ## V.2 Project Structure, Files/Purpose ##
-V2 is run directly through ```python3 main.py```. The current implementation has a interactive GUI and score input screen, however suffers severe memory/packet loss and will crash after 4 minutes max. Instead of using a C tracker, V2 uses a NiTE/OpenNI2 Python tracker stored in the submodule Kinect_Skeleton_Tracker, which needs to be initialized before running the program!
+V2 is run through ```python3 main.py```. The current implementation has a interactive GUI and score input screen, however suffers severe memory loss and will crash after 4 minutes max. Instead of using a C tracker, V2 uses a NiTE/OpenNI2 Python tracker stored in the submodule Kinect_Skeleton_Tracker, which needs to be initialized before running the program!
 
 Likely cause of the memory loss is not releasing the tracked frame after being used, as the Azure Kinect requires. Finding a function to do that in the library will be needed, or adding a command to the library. As I could not find where the library is stored, this was not done and so there is no confirmation that releasing the frame will fix the packet loss.
 
@@ -65,11 +64,8 @@ In testing:
 
 To compile, all C++ folders use CMake while C folders use Make. In C++ folders, make a folder called build, then run cmake .. and make from that folder. In C folders, run make in the directory with the Makefile.
 
-The rest of the folder is the Python that runs the ODrive based off data from the C++ tracker, or misc files such as the license, and readme.
-
 ### Files of interest ###
-
-Due to parsing data completely in C instead of in Python (see footnote), much of V1's code has been replaced. However referencing it may still be useful. [Here](https://github.com/dpengineering/kinetic-maze/tree/38de238fccfc4a8ec9930c75112bbee1b0594ff2) is one of the commits with most of V1 intact, but with more joints being output and a basic skeleton tracking attempt in Pygame added.
+Due to parsing data completely in C instead of in Python (see footnote), much of V1's code has been replaced. However referencing it may still be useful. [Here](https://github.com/dpengineering/kinetic-maze/tree/38de238fccfc4a8ec9930c75112bbee1b0594ff2) is one of the commits with most of V1 intact, but with more joints being passed to Python.
 
 #### The C++ tracker ####
 The C++ tracker is built off MS Azure Kinect sample code, from a program called simple_cpp_sample. It takes the joint data, accesses the hand data, and calculates the angle between the hands of the closest user (found by measuring Z) using atan2 and the X/Y coordinates of the hands. This angle data is then sent along a TCP socket bound to 127.0.0.1, port 7266 [1].
@@ -77,7 +73,7 @@ The C++ tracker is built off MS Azure Kinect sample code, from a program called 
 
 
 #### physics.py ####
-The original motor control code from V1, which could not be replaced due to heavy customization and JSON configs. The JSON configs will eventually be replaced with variables directly in the code.
+We've tried to replace physics.py, but it's too customized to easily do and works fine so far. Physics.py and all the .json files control the ODrive.
 
 
 ## Specific issues/solutions/implementations ##

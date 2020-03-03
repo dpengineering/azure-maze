@@ -73,6 +73,7 @@ On the other terminal window (on the second monitor), run ```python3 main.py```.
 
 With one monitor: change vis_cpp_tracker/libs/k4abt_libs/window_controller_3d/WindowController3d.h line 49 to bool fullscreen = false, then follow the instructions for two monitors.
 
+One monitor can be used with fullscreen, however there will be no way to exit.
 
 
 
