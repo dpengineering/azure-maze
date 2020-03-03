@@ -1,6 +1,7 @@
 #! /bin/bash
 
-echo "Starting mouse limiter."
+echo "Starting mouse limiter script."
+
 while true
 do
 
