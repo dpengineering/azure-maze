@@ -69,6 +69,7 @@ void WindowController3d::Create(const char* name, bool showWindow, int width, in
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_AUTO_ICONIFY, GLFW_FALSE);
     if (!showWindow)
     {
         glfwWindowHint(GLFW_VISIBLE, GL_FALSE);

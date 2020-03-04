@@ -489,6 +489,7 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT uMsg,
             return 0;
         }
 
+
         case WM_SYSCOMMAND:
         {
             switch (wParam & 0xfff0)
