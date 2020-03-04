@@ -35,7 +35,7 @@ while True:
     angle = int.from_bytes(data, byteorder='little', signed=True)
 
     #print("Post-proc type:", type(angle), "\n")
-    print("Post-proc raw:", angle, "\n")
+    #print("Post-proc raw:", angle, "\n")
 
     #if angle not in range(20,-20):
     #        motor.set_velocity(motor.adjust_angle(-angle))

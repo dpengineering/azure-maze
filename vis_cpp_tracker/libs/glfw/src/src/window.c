@@ -901,4 +901,3 @@ GLFWAPI void glfwPostEmptyEvent(void)
 
     _glfwPlatformPostEmptyEvent();
 }
-

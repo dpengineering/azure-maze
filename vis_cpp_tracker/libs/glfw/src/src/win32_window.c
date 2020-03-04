@@ -1721,4 +1721,3 @@ GLFWAPI HWND glfwGetWin32Window(GLFWwindow* handle)
     _GLFW_REQUIRE_INIT_OR_RETURN(NULL);
     return window->win32.handle;
 }
-
