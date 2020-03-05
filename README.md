@@ -26,6 +26,8 @@ if device unavailable after compiling samples, run with sudo as rules not proper
 pip3 install kivy
 ```
 
+2. For kivy, Pidev must be installed from https://github.com/dpengineering/RaspberryPiCommon
+
 
 ## Azure Kinect on Linux ##
 As most Microsoft documentation is windows based, Linux usage will be documented as thoroughly as possible for future use. In general, follow instructions in the Microsoft documentation.
