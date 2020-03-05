@@ -31,7 +31,9 @@
         center_x: root.center_x * 0.4
         center_y: root.center_y * 1.1
         size: 200, 40
-        on_press: root.manager.current = 'instructions'
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'instructions'
 
     Button:
         text: '     Leaderboards'
@@ -54,7 +56,9 @@
         center_x: root.center_x * 0.4
         center_y: root.center_y * 0.9
         size: 200, 40
-        on_press: root.manager.current = 'options'
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'options'
 
         Label:
             id: title_text
@@ -87,7 +91,9 @@
         center_x: root.center_x * 0.4
         center_y: root.center_y * 0.9
         size: 200, 40
-        on_press: root.manager.current = 'main'
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'main'
 
         Label:
             id: title_text
@@ -120,7 +126,9 @@
         center_x: root.center_x * 0.4
         center_y: root.center_y * 0.9
         size: 200, 40
-        on_press: root.manager.current = 'main'
+        on_press:
+            root.manager.transition.direction = 'left'
+            root.manager.current = 'main'
 
         Label:
             id: title_text
