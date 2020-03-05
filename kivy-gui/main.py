@@ -17,15 +17,14 @@ from kivy.animation import Animation
 from kivy.config import Config
 
 SCREEN_MANAGER = ScreenManager()
-LEADERBOARD_SCREEN_NAME = 'leaderboard'
-IDLE_SCREEN_NAME = 'idle'
-GAME_SCREEN_NAME = 'game'
+MAIN_SCREEN_NAME = 'main'
 
 
 class AzureMaze(App):
     """
     Class to handle running the GUI Application
     """
+
 
     def build(self):
         """
@@ -36,12 +35,8 @@ class AzureMaze(App):
 
 
 Window.clearcolor = (1, 1, 1, 1)  # White
-class LeaderScreen(Screen):
-    pass
-class IdleScreen(Screen):
-    pass
-class GameScreen(Screen):
-    pass
+class MainScreen(Screen):
+     pass
 
 
 """
@@ -49,7 +44,7 @@ Widget additions
 """
 
 Builder.load_file('main.kv')
-SCREEN_MANAGER.add_widget(LeaderScreen(name=LEADERBOARD_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 
 
 
