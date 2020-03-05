@@ -18,6 +18,7 @@ from kivy.config import Config
 
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
+INSTRUCTIONS_SCREEN_NAME = 'instructions'
 
 
 class AzureMaze(App):
@@ -37,6 +38,8 @@ class AzureMaze(App):
 Window.clearcolor = (1, 1, 1, 1)  # White
 class MainScreen(Screen):
      pass
+class InstructionScreen(Screen):
+    pass
 
 
 """
@@ -45,6 +48,7 @@ Widget additions
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(InstructionScreen(name=INSTRUCTIONS_SCREEN_NAME))
 
 
 
