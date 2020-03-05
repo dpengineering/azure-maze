@@ -75,6 +75,9 @@ With one monitor: change vis_cpp_tracker/libs/k4abt_libs/window_controller_3d/Wi
 
 One monitor can be used with fullscreen, however there will be no way to exit.
 
+## Troubleshooting ##
+If the kivy screen is white, make sure for borderless Kivy to change ~/.kivy/config.ini borderless to = 1, **not** = 0!
+
 
 
 ## Reference Links ##

@@ -93,6 +93,8 @@ We've tried to replace physics.py, but it's too customized to easily do and work
   - Most Azure problems have solutions in the SDK Issues page, in the docs, or sample code. Check those carefully first!
   - Don't forget to release the frame after use.
   - The Kinect can only be accessed from one program at a time, so do as much as possible within the C++ tracker. More TCP servers can likely be opened if needed.
+- Kivy
+  - If the screen comes up as blank, change ~/,kivy/config.ini borderless=0 to borderless=1.
 
 ## Footnotes and Reference links ##
 
