@@ -19,6 +19,7 @@ from kivy.config import Config
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 INSTRUCTIONS_SCREEN_NAME = 'instructions'
+OPTIONS_SCREEN_NAME = 'options'
 
 
 class AzureMaze(App):
@@ -40,6 +41,8 @@ class MainScreen(Screen):
      pass
 class InstructionScreen(Screen):
     pass
+class OptionsScreen(Screen):
+    pass
 
 
 """
@@ -49,6 +52,7 @@ Widget additions
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(InstructionScreen(name=INSTRUCTIONS_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(OptionsScreen(name=OPTIONS_SCREEN_NAME))
 
 
 

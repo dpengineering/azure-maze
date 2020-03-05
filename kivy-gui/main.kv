@@ -54,6 +54,7 @@
         center_x: root.center_x * 0.4
         center_y: root.center_y * 0.9
         size: 200, 40
+        on_press: root.manager.current = 'options'
 
         Label:
             id: title_text
@@ -90,7 +91,40 @@
 
         Label:
             id: title_text
-            text: 'Azure Maze'
+            text: 'How to play'
+            color: (0.266, 0.545, 0.788, 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 40
+            center_x: root.center_x * 0.6
+            center_y: root.center_y * 1.4
+
+<OptionsScreen>
+    name: 'options'
+    FloatLayout:
+        size_hint: None, None
+        #pos: 0, 0
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 0.75
+            Rectangle:
+                pos: self.pos
+                size: root.size
+
+    Button:
+        text: 'Back'
+        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+        font_name: '../assets/PressStart2P-Regular.ttf'
+        font_size: 20
+        background_color: 0, 0, 0, 0
+        background_normal: ''
+        center_x: root.center_x * 0.4
+        center_y: root.center_y * 0.9
+        size: 200, 40
+        on_press: root.manager.current = 'main'
+
+        Label:
+            id: title_text
+            text: 'Options'
             color: (0.266, 0.545, 0.788, 1) #100, 137, 161
             font_name: '../assets/PressStart2P-Regular.ttf'
             font_size: 40
