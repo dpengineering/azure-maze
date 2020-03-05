@@ -1,5 +1,7 @@
 # Azure Maze #
-Kinetic Maze, with the Azure Kinect instead of XBox Kinect.
+Kinetic Maze, with the Azure Kinect instead of XBox Kinect. 
+
+Note that this is a Dos Pueblos Engineering Academy project, and it is assumed that this project is running with DPEA pre-configured hardware/software (specifically the maze motor). Success outside of the DPEA is not guaranteed, however individual parts relating to the Azure Kinect should be able to run outside of the project.
 
 
 
