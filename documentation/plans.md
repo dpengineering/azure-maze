@@ -6,5 +6,5 @@
     - apt-get install xdotool
     - https://stackoverflow.com/questions/20595716/control-mouse-by-writing-to-dev-input-mice
 
-
-Testing wmctrl to force window to top
+- Experimentation mode? for a few seconds before game start?
+- READD TAS
