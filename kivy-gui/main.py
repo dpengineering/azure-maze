@@ -21,6 +21,14 @@ MAIN_SCREEN_NAME = 'main'
 INSTRUCTIONS_SCREEN_NAME = 'instructions'
 OPTIONS_SCREEN_NAME = 'options'
 
+class CustomImage(Image):
+    def __init__(self, *args, **kwargs):
+        Image.__init__(self, *args, **kwargs)
+        self.bind(texture=self._update_texture_filters)
+
+    def _update_texture_filters(self, image, texture):
+        texture.mag_filter = 'nearest'
+
 
 class AzureMaze(App):
     """
@@ -36,20 +44,17 @@ class AzureMaze(App):
         return SCREEN_MANAGER
 
 
-Window.clearcolor = (1, 1, 1, 1)  # White
+Window.clearcolor = (1, 1, 1, 1)  # White 1280 x 1080
 class MainScreen(Screen):
     def __init__(self, **kw):
-        Builder.load_file('main.kv')
         super(MainScreen, self).__init__(**kw)
 
 class InstructionsScreen(Screen):
     def __init__(self, **kw):
-        Builder.load_file('main.kv')
         super(InstructionsScreen, self).__init__(**kw)
 
 class OptionsScreen(Screen):
     def __init__(self, **kw):
-        Builder.load_file('main.kv')
         super(OptionsScreen, self).__init__(**kw)
 
 
