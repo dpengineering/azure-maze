@@ -38,11 +38,19 @@ class AzureMaze(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 class MainScreen(Screen):
-     pass
-class InstructionScreen(Screen):
-    pass
+    def __init__(self, **kw):
+        Builder.load_file('main.kv')
+        super(MainScreen, self).__init__(**kw)
+
+class InstructionsScreen(Screen):
+    def __init__(self, **kw):
+        Builder.load_file('main.kv')
+        super(InstructionsScreen, self).__init__(**kw)
+
 class OptionsScreen(Screen):
-    pass
+    def __init__(self, **kw):
+        Builder.load_file('main.kv')
+        super(OptionsScreen, self).__init__(**kw)
 
 
 """
@@ -51,7 +59,7 @@ Widget additions
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
-SCREEN_MANAGER.add_widget(InstructionScreen(name=INSTRUCTIONS_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(InstructionsScreen(name=INSTRUCTIONS_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(OptionsScreen(name=OPTIONS_SCREEN_NAME))
 
 
