@@ -1,3 +1,2 @@
-The game will automatically start 5 seconds after you press start.
 To control the maze, change the angle between your hands by tilting your upper body left or right.
 The goal of the game is to get the ball to the center of the maze as fast as possible.
