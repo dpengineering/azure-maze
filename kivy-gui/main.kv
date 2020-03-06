@@ -11,51 +11,68 @@
                 size: root.size
 
     Button:
-        text: '   Start Game'
+        text: 'Start Game'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 0
+        background_color: 0, 0, 0, 1
         background_normal: ''
-        center_x: root.center_x * 0.4
+        center_x: root.center_x * 0.5
         center_y: root.center_y * 1.2
-        size: 200, 40
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 300, 40
+        size_hint: None, None
+
 
     Button:
-        text: '    How To Play'
+        text: 'How To Play'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 0
+        background_color: 0, 0, 0, 1
         background_normal: ''
-        center_x: root.center_x * 0.4
+        center_x: root.center_x * 0.5
         center_y: root.center_y * 1.1
-        size: 200, 40
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 300, 40
+        size_hint: None, None
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'instructions'
 
     Button:
-        text: '     Leaderboards'
+        text: 'Leaderboards'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 0
+        background_color: 0, 0, 0, 1
         background_normal: ''
-        center_x: root.center_x * 0.4
+        center_x: root.center_x * 0.5
         center_y: root.center_y * 1
-        size: 200, 40
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 300, 40
+        size_hint: None, None
 
     Button:
         text: 'Options'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 0
+        background_color: 0, 0, 0, 1
         background_normal: ''
-        center_x: root.center_x * 0.4
+        center_x: root.center_x * 0.5
         center_y: root.center_y * 0.9
-        size: 200, 40
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 300, 40
+        size_hint: None, None
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'options'
@@ -86,7 +103,7 @@
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 0
+        background_color: 0, 0, 0, 1
         background_normal: ''
         center_x: root.center_x * 0.4
         center_y: root.center_y * 0.9
