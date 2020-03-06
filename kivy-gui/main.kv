@@ -98,39 +98,38 @@
                 pos: self.pos
                 size: root.size
 
-    Button:
-        text: 'Back'
-        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
-        font_name: '../assets/PressStart2P-Regular.ttf'
-        font_size: 20
-        background_color: 0, 0, 0, 1
-        background_normal: ''
-        center_x: root.center_x * 0.4
-        center_y: root.center_y * 0.9
-        size: 200, 40
-        size_hint: None, None
-        on_press:
-            root.manager.transition.direction = 'left'
-            root.manager.current = 'main'
+        Button:
+            text: 'Back'
+            color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 20
+            background_color: 0, 0, 0, 1
+            background_normal: ''
+            center_x: root.center_x * 0.4
+            center_y: root.center_y * 0.9
+            size: 200, 40
+            size_hint: None, None
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'main'
 
-    Label:
-        id: instructions
-        text: 'To control the maze, change the angle between your hands by tilting your upper body left or right. \n  \
-            The goal of the game is to get the ball to the center of the maze as fast as possible.'
-        color: (0.266, 0.545, 0.788, 1) #100, 137, 161
-        font_name: '../assets/PressStart2P-Regular.ttf'
-        font_size: 20
-        center_x: root.center_x * 0.6
-        center_y: root.center_y * 1.2
+        Label:
+            id: instructions
+            text: 'no'
+            color: (0.266, 0.545, 0.788, 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 20
+            center_x: root.center_x * 0.6
+            center_y: root.center_y * 1.2
 
-    Label:
-        id: title_text
-        text: 'How to play'
-        color: (0.266, 0.545, 0.788, 1) #100, 137, 161
-        font_name: '../assets/PressStart2P-Regular.ttf'
-        font_size: 40
-        center_x: root.center_x * 0.6
-        center_y: root.center_y * 1.4
+        Label:
+            id: title_text
+            text: 'How to play'
+            color: (0.266, 0.545, 0.788, 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 40
+            center_x: root.center_x * 0.6
+            center_y: root.center_y * 1.4
 
 <OptionsScreen>
     name: 'options'
