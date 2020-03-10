@@ -1,0 +1,62 @@
+<AdminScreen>:
+    name: 'admin'
+    FloatLayout:
+        size_hint: None, None
+        canvas.before:
+            Color:
+                rgba: 0, 0, 0, 1
+            Rectangle:
+                pos: self.pos
+                size: root.size
+
+    CustomImage:
+        source: "maze3.png"
+        allow_stretch: True
+        keep_ratio: True
+
+    HoverButton:
+        text: ' > Quit Game' if self.hovered else ' Quit Game'
+        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+        font_name: '../assets/PressStart2P-Regular.ttf'
+        font_size: 20
+        background_color: 0.1, 0.1, 0.1, 1
+        background_normal: ''
+        center_x: root.center_x * 0.5
+        center_y: root.center_y * 1.2
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 320, 40
+        size_hint: None, None
+        on_press: root.exit_program()
+
+    HoverButton:
+        text: ' > Return to Menu' if self.hovered else ' Return to Menu'
+        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+        font_name: '../assets/PressStart2P-Regular.ttf'
+        font_size: 20
+        background_color: 0.1, 0.1, 0.1, 1
+        background_normal: ''
+        center_x: root.center_x * 0.5
+        center_y: root.center_y * 1.1
+        halign: 'left'
+        valign: 'middle'
+        size: 320, 40
+        size_hint: None, None
+        on_press: root.transition_back()
+
+    HoverButton:
+        text: ' > OS Shutdown' if self.hovered else ' OS Shutdown'
+        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+        font_name: '../assets/PressStart2P-Regular.ttf'
+        font_size: 20
+        background_color: 0.1, 0.1, 0.1, 1
+        background_normal: ''
+        center_x: root.center_x * 0.5
+        center_y: root.center_y * 1
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 320, 40
+        size_hint: None, None
+        on_press: root.shutdown()

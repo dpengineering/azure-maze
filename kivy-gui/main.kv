@@ -15,12 +15,12 @@
         allow_stretch: True
         keep_ratio: True
 
-    Button:
-        text: 'Start Game'
+    HoverButton:
+        text: ' > Start Game' if self.hovered else ' Start Game'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 1
+        background_color: 0.1, 0.1, 0.1, 1
         background_normal: ''
         center_x: root.center_x * 0.5
         center_y: root.center_y * 1.2
@@ -34,12 +34,12 @@
             root.manager.current = 'start'
 
 
-    Button:
-        text: 'How To Play'
+    HoverButton:
+        text: ' > How To Play' if self.hovered else ' How To Play'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 1
+        background_color: 0.1, 0.1, 0.1, 1
         background_normal: ''
         center_x: root.center_x * 0.5
         center_y: root.center_y * 1.1
@@ -52,12 +52,12 @@
             root.manager.transition.direction = 'right'
             root.manager.current = 'instructions'
 
-    Button:
-        text: 'Leaderboards'
+    HoverButton:
+        text: ' > Leaderboards' if self.hovered else ' Leaderboards'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 1
+        background_color: 0.1, 0.1, 0.1, 1
         background_normal: ''
         center_x: root.center_x * 0.5
         center_y: root.center_y * 1
@@ -70,12 +70,12 @@
             root.manager.transition.direction = 'right'
             root.manager.current = 'leaderboard'
 
-    Button:
-        text: 'Options'
+    HoverButton:
+        text: ' > Options' if self.hovered else ' Options'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 1
+        background_color: 0.1, 0.1, 0.1, 1
         background_normal: ''
         center_x: root.center_x * 0.5
         center_y: root.center_y * 0.9
@@ -88,12 +88,12 @@
             root.manager.transition.direction = 'right'
             root.manager.current = 'options'
 
-    Button:
-        text: 'Credits'
+    HoverButton:
+        text: ' > Credits' if self.hovered else ' Credits'
         color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
         font_name: '../assets/PressStart2P-Regular.ttf'
         font_size: 20
-        background_color: 0, 0, 0, 1
+        background_color: 0.1, 0.1, 0.1, 1
         background_normal: ''
         center_x: root.center_x * 0.5
         center_y: root.center_y * 0.8
@@ -105,6 +105,24 @@
         on_press:
             root.manager.transition.direction = 'right'
             root.manager.current = 'credits'
+
+    HoverButton:
+        text: ' > Exit Game' if self.hovered else ' Exit Game'
+        color: (0.392, 0.537, 0.631 , 1) #100, 137, 161
+        font_name: '../assets/PressStart2P-Regular.ttf'
+        font_size: 20
+        background_color: 0.1, 0.1, 0.1, 1
+        background_normal: ''
+        center_x: root.center_x * 0.5
+        center_y: root.center_y * 0.7
+        halign: 'left'
+        valign: 'middle'
+        text_size: self.size
+        size: 300, 40
+        size_hint: None, None
+        on_press:
+            root.manager.transition.direction = 'right'
+            root.manager.current = 'passCode'
 
     Label:
         id: title_text
@@ -140,6 +158,15 @@
             on_press:
                 root.manager.transition.direction = 'left'
                 root.manager.current = 'main'
+
+        Label:
+            text: 'Leaderboards'
+            color: (0.266, 0.545, 0.788, 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 40
+            center_x: root.center_x
+            center_y: root.center_y * 1.4
+
 <StartScreen>
     name: 'start'
     on_enter: root.countstart()
@@ -163,7 +190,7 @@
 
         Label:
             id: number
-            text: '10'
+            text: '5'
             color: (0.266, 0.545, 0.788, 1) #100, 137, 161
             font_name: '../assets/PressStart2P-Regular.ttf'
             font_size: 80
@@ -365,7 +392,7 @@
                 root.manager.current = 'main'
 
         Label:
-            text: 'Credit where credit is due'
+            text: 'Credits'
             color: (0.266, 0.545, 0.788, 1) #100, 137, 161
             font_name: '../assets/PressStart2P-Regular.ttf'
             font_size: 40
