@@ -1,5 +1,7 @@
 #Written by Andrew Xie and Kogan Sam, December 2020, for the DPEA
 import os
+import datetime
+import sys
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -15,7 +17,7 @@ from pidev.kivy.PauseScreen import PauseScreen
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from kivy.animation import Animation
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.clock import Clock
 from kivy.config import Config
 from threading import Thread
@@ -278,7 +280,6 @@ class PassCodeScreen(Screen):
 class MainScreen(Screen):
     pass
 
-
 class StartScreen(Screen):
     global num
     num = 5
@@ -303,9 +304,71 @@ class StartScreen(Screen):
 
 
 class GameScreen(Screen):
-    pass
+    global time
+    time = 0
+    global delta
+    delta = 0
+    global hour
+    hour = 24
+    global running
+    running = False
 
+    def __init__(self, **kwargs):
+        super(GameScreen, self).__init__(**kwargs)
 
+    def start(self):
+        global running
+        if running==False:
+            running = True
+            Clock.schedule_interval(self.update, 1)
+
+    def stop(self):
+        global running
+        if running==True:
+            running = False
+            Clock.unschedule(self.update)
+
+    def update(self, *kwargs):
+        global delta
+        global time
+        global hour
+        if time == 0:
+            if delta > 0:
+                delta = delta - 1
+                time = 59
+                if delta >= 10:
+                    if time >= 10:
+                        self.ids.timer.text = '%s:0%s:%s' % (hour, delta, time)
+                    elif time < 10:
+                        self.ids.timer.text = '%s:0%s:0%s' % (hour, delta, time)
+                elif delta < 10:
+                    if time >= 10:
+                        self.ids.timer.text = '%s:0%s:%s' % (hour, delta, time)
+                    elif time < 10:
+                        self.ids.timer.text = '%s:0%s:0%s' % (hour, delta, time)
+            if delta == 0:
+                hour = hour - 1
+                delta = 59
+                time = 59
+                if hour == 0:
+                    self.stop();
+                    self.ids.timer.text = '24:00:00'
+                    hour = 24
+                    delta = 0
+                    time = 0
+
+        elif time > 0:
+            time = time - 1
+            if delta < 10:
+                if time >= 10:
+                    self.ids.timer.text = '%s:0%s:%s' % (hour, delta, time)
+                elif time < 10:
+                    self.ids.timer.text = '%s:0%s:0%s' % (hour, delta, time)
+            if delta >= 10:
+                if time >= 10:
+                    self.ids.timer.text = '%s:%s:%s' % (hour, delta, time)
+                elif time < 10:
+                    self.ids.timer.text = '%s:%s:0%s' % (hour, delta, time)
 class EndScreen(Screen):
     pass
 
