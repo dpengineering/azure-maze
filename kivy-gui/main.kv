@@ -190,7 +190,7 @@
 
         Label:
             id: number
-            text: '5'
+            text: 'Ready'
             color: (0.266, 0.545, 0.788, 1) #100, 137, 161
             font_name: '../assets/PressStart2P-Regular.ttf'
             font_size: 80
@@ -207,6 +207,14 @@
             Rectangle:
                 pos: self.pos
                 size: root.size
+
+        Label:
+            text: '00:00'
+            color: (0.266, 0.545, 0.788, 1) #100, 137, 161
+            font_name: '../assets/PressStart2P-Regular.ttf'
+            font_size: 40
+            center_x: root.center_x
+            center_y: root.center_y * 0.6
 
         Button:
             text: '"To End Screen"'

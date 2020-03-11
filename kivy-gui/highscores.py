@@ -69,7 +69,7 @@ class Scoreboard:
         return name,score
 
     def deleteEntry(self, number):
-        with open(self.scorepath,"r") as f:
+        with open(self.scorepath,"rStart") as f:
             lines = f.readlines()
 
         lines.pop(number-1)

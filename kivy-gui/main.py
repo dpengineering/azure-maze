@@ -285,7 +285,9 @@ class StartScreen(Screen):
     global event1
     def countstart(self):
         global event1
+        sleep(0.3);
         event1 = Clock.schedule_interval(self.countdown, 1)
+        self.ids.number.text = "%d" % num
     def countdown(self,dt):
         global num
         global event1
@@ -297,7 +299,7 @@ class StartScreen(Screen):
             num = 5
             SCREEN_MANAGER.current = GAME_SCREEN_NAME
             Clock.unschedule(event1)
-            self.ids.number.text = "%d" % num
+            self.ids.number.text = "Ready"
 
 
 class GameScreen(Screen):
