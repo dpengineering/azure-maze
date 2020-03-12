@@ -187,7 +187,7 @@ class PassCodeScreen(Screen):
         """
         global USERPW
 
-        self.ids.pw.color = 0.392, 0.537, 0.631 , 1
+        self.ids.pw.color = 0.392, 0.537, 0.631, 1
         self.ids.pw.text += '* '
         USERPW += str(num)
 
@@ -313,6 +313,11 @@ class GameScreen(Screen):
     global running
     running = False
     global event2
+    global flash
+    flash = False
+    global event3
+    global flash2
+    flash2 = False
 
     def __init__(self, **kwargs):
         super(GameScreen, self).__init__(**kwargs)
@@ -331,10 +336,22 @@ class GameScreen(Screen):
             running = False
             Clock.unschedule(event2)
 
+    def flashing(self, *kwargs):
+        global flash
+        if flash == False:
+            flash = True
+            self.ids.timer.color = (1, 1, 1, 1)
+        else:
+            flash = False
+            self.ids.timer.color = (0.266, 0.545, 0.788, 1)
+
     def update(self, *kwargs):
         global delta
         global time
         global hour
+        global flash
+        global event3
+        global flash2
         if time == 0:
             if delta > 0:
                 delta = delta - 1
@@ -374,6 +391,11 @@ class GameScreen(Screen):
                     self.ids.timer.text = '%s:%s:%s' % (hour, delta, time)
                 elif time < 10:
                     self.ids.timer.text = '%s:%s:0%s' % (hour, delta, time)
+
+        if delta <= 1:
+            if flash2 == False:
+                flash2 = True
+                event3 = Clock.schedule_interval(self.flashing, 0.25)
 class EndScreen(Screen):
     def stop(self):
         global running
@@ -381,9 +403,12 @@ class EndScreen(Screen):
         global time
         global hour
         global event2
+        global flash2
         if running == True:
             running = False
+            flash2 = False
             Clock.unschedule(event2)
+            Clock.unschedule(event3)
             hour = 0
             delta = 15
             time = 0
