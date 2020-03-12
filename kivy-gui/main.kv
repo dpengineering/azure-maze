@@ -1,3 +1,6 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+
 <MainScreen>
     name: 'main'
     FloatLayout:
@@ -30,7 +33,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
-            root.manager.transition.direction = 'left'
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.current = 'start'
 
 
@@ -49,6 +52,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.transition.direction = 'right'
             root.manager.current = 'instructions'
 
@@ -67,6 +71,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.transition.direction = 'right'
             root.manager.current = 'leaderboard'
 
@@ -85,6 +90,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.transition.direction = 'right'
             root.manager.current = 'options'
 
@@ -103,6 +109,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.transition.direction = 'right'
             root.manager.current = 'credits'
 
@@ -121,6 +128,7 @@
         size: 300, 40
         size_hint: None, None
         on_press:
+            app.root.transition = FadeTransition(duration=0.3)
             root.manager.transition.direction = 'right'
             root.manager.current = 'passCode'
 

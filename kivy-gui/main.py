@@ -6,7 +6,8 @@ import sys
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import FadeTransition
 from kivy.uix.label import Label
 from kivy.uix.image import Image
 import os.path
@@ -404,14 +405,17 @@ class EndScreen(Screen):
         global hour
         global event2
         global flash2
+        global event3
         if running == True:
             running = False
-            flash2 = False
             Clock.unschedule(event2)
-            Clock.unschedule(event3)
             hour = 0
             delta = 15
             time = 0
+            if flash2 == True:
+                flash2 = False
+                Clock.unschedule(event3)
+
 
 class LeaderboardScreen(Screen):
     pass
