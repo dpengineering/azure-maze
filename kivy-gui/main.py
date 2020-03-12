@@ -307,26 +307,29 @@ class GameScreen(Screen):
     global time
     time = 0
     global delta
-    delta = 0
+    delta = 15
     global hour
-    hour = 24
+    hour = 0
     global running
     running = False
+    global event2
 
     def __init__(self, **kwargs):
         super(GameScreen, self).__init__(**kwargs)
 
     def start(self):
         global running
+        global event2
         if running==False:
             running = True
-            Clock.schedule_interval(self.update, 1)
+            event2 = Clock.schedule_interval(self.update, 1)
 
     def stop(self):
         global running
+        global event2
         if running==True:
             running = False
-            Clock.unschedule(self.update)
+            Clock.unschedule(event2)
 
     def update(self, *kwargs):
         global delta
@@ -338,24 +341,26 @@ class GameScreen(Screen):
                 time = 59
                 if delta >= 10:
                     if time >= 10:
-                        self.ids.timer.text = '%s:0%s:%s' % (hour, delta, time)
+                        self.ids.timer.text = '%s:%s:%s' % (hour, delta, time)
                     elif time < 10:
-                        self.ids.timer.text = '%s:0%s:0%s' % (hour, delta, time)
+                        self.ids.timer.text = '%s:%s:0%s' % (hour, delta, time)
                 elif delta < 10:
                     if time >= 10:
                         self.ids.timer.text = '%s:0%s:%s' % (hour, delta, time)
                     elif time < 10:
                         self.ids.timer.text = '%s:0%s:0%s' % (hour, delta, time)
             if delta == 0:
-                hour = hour - 1
-                delta = 59
-                time = 59
+                if hour > 0:
+                    hour = hour - 1
+                    delta = 59
+                    time = 59
                 if hour == 0:
                     self.stop();
-                    self.ids.timer.text = '24:00:00'
-                    hour = 24
-                    delta = 0
+                    self.ids.timer.text = '0:15:00'
+                    hour = 0
+                    delta = 15
                     time = 0
+                    SCREEN_MANAGER.current = END_SCREEN_NAME
 
         elif time > 0:
             time = time - 1
@@ -370,8 +375,18 @@ class GameScreen(Screen):
                 elif time < 10:
                     self.ids.timer.text = '%s:%s:0%s' % (hour, delta, time)
 class EndScreen(Screen):
-    pass
-
+    def stop(self):
+        global running
+        global delta
+        global time
+        global hour
+        global event2
+        if running == True:
+            running = False
+            Clock.unschedule(event2)
+            hour = 0
+            delta = 15
+            time = 0
 
 class LeaderboardScreen(Screen):
     pass

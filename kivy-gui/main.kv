@@ -212,7 +212,7 @@
 
         Label:
             id: timer
-            text: '24:00:00'
+            text: '0:15:00'
             color: (0.266, 0.545, 0.788, 1) #100, 137, 161
             font_name: '../assets/PressStart2P-Regular.ttf'
             font_size: 40
@@ -236,6 +236,7 @@
 
 <EndScreen>
     name: 'end'
+    on_enter: root.stop()
     FloatLayout:
         size_hint: None, None
         canvas.before:
