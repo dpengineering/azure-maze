@@ -1,5 +1,5 @@
 # Azure Maze #
-Kinetic Maze, with the Azure Kinect instead of XBox Kinect. 
+Kinetic Maze, with the Azure Kinect instead of XBox Kinect.
 
 Note that this is a Dos Pueblos Engineering Academy project, and it is assumed that this project is running with DPEA pre-configured hardware/software (specifically the maze motor). Success outside of the DPEA is not guaranteed, however individual parts relating to the Azure Kinect should be able to run outside of the project.
 
@@ -40,24 +40,6 @@ Joints: x,y,z, measured in mm from the lens of the camera.
 
 ## How to Run ##
 
-**OUTDATED - INSTRUCTIONS INTENDED FOR RELEASE v1.0, script deleted from up to date repo**
-
-Compile the tracker by running:
-```
-make
-```
-(In the subfolder).
-
-From the project directory:
-```
-./run.sh
-```
-
-If the program crashes, current method of resetting is to restart the computer to free port 7266. Also, to reset the ODrive, wait for the fan on the power supply to stop before turning the power strip back on, to ensure power to the ODrive actually cut.
-
-
-**To run the current prototype**
-
 **If motors are needed, uncomment the motor lines from main.py**
 
 With two monitors:
@@ -78,6 +60,8 @@ On the other terminal window (on the second monitor), run ```python3 main.py```.
 With one monitor: change vis_cpp_tracker/libs/k4abt_libs/window_controller_3d/WindowController3d.h line 49 to bool fullscreen = false, then follow the instructions for two monitors.
 
 One monitor can be used with fullscreen, however there will be no way to exit.
+
+To reset the ODrive, wait for the fan on the power supply to stop before turning the power strip back on, to ensure power to the ODrive actually cut.
 
 ## Troubleshooting ##
 If the kivy screen is white, make sure for borderless Kivy to change ~/.kivy/config.ini borderless to = 1, **not** = 0!
